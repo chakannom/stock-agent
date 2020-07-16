@@ -1,9 +1,9 @@
 //
-//  Created by Ivan Mejia on 11/28/16.
+//  Created by Ivan Mejia on 12/24/16.
 //
 // MIT License
 //
-// Copyright (c) 2016 ivmeroLabs. All rights reserved.
+// Copyright (c) 2016 ivmeroLabs.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,28 +24,28 @@
 // SOFTWARE.
 //
 
-#include "network_util.hpp"
+#pragma once 
 
-namespace cfx {
+#include "../../../core/web/rest/basic_controller.hpp"
 
-   HostInetInfo NetworkUtil::queryHostInetInfo() {
-       io_service ios;
-       tcp::resolver resolver(ios);
-       tcp::resolver::query query(host_name(), "");
-       return resolver.resolve(query);
-   }
+using namespace cfx;
 
-   std::string NetworkUtil::hostIP(unsigned short family) {
-       auto hostInetInfo = queryHostInetInfo();
-       tcp::resolver::iterator end;
-       while(hostInetInfo != end) {
-           tcp::endpoint ep = *hostInetInfo++;
-           sockaddr sa = *ep.data();
-           if (sa.sa_family == family) {
-               return ep.address().to_string();
-           }
-       }
-       return nullptr;
-   }
-   
-}
+class MicroserviceController : public BasicController, Controller {
+public:
+    MicroserviceController() : BasicController() {}
+    ~MicroserviceController() {}
+    void handleGet(http_request message) override;
+    void handlePut(http_request message) override;
+    void handlePost(http_request message) override;
+    void handlePatch(http_request message) override;
+    void handleDelete(http_request message) override;
+    void handleHead(http_request message) override;
+    void handleOptions(http_request message) override;
+    void handleTrace(http_request message) override;
+    void handleConnect(http_request message) override;
+    void handleMerge(http_request message) override;
+    void initRestOpHandlers() override;    
+
+private:
+    static json::value responseNotImpl(const http::method & method);
+};

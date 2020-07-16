@@ -3,7 +3,7 @@
 // #include <execinfo.h>
 // #include <unistd.h>
 
-namespace cks {
+namespace cfx {
     class RuntimeUtil {
     public:
         static void printStackTrace() {

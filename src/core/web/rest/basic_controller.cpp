@@ -24,8 +24,8 @@
 // SOFTWARE.
 //
 
+#include "../../core/util/network_util.hpp"
 #include "basic_controller.hpp"
-#include "network_utils.hpp"
 
 namespace cfx {
     BasicController::BasicController() {
@@ -41,10 +41,10 @@ namespace cfx {
 
         endpointBuilder.set_scheme(endpointURI.scheme());
         if (endpointURI.host() == "host_auto_ip4") {
-            endpointBuilder.set_host(NetworkUtils::hostIP4());        
+            endpointBuilder.set_host(NetworkUtil::hostIP4());        
         }
         else if (endpointURI.host() == "host_auto_ip6") {
-            endpointBuilder.set_host(NetworkUtils::hostIP6());
+            endpointBuilder.set_host(NetworkUtil::hostIP6());
         }
         endpointBuilder.set_port(endpointURI.port());
         endpointBuilder.set_path(endpointURI.path());

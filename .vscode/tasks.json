@@ -20,11 +20,13 @@
                 "/EHsc",
                 "/Fe:",
                 "${workspaceFolder}\\build\\stock-agent.exe",
-                "${workspaceFolder}\\src\\*.cpp",
+                "${workspaceFolder}\\src\\main.cpp",
                 "/I",
                 "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\include",
+                "/I",
+                "${workspaceFolder}\\src",
                 "/link",
-                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\lib\\cpprest_2_10.lib"
+                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\lib\\*.lib"
             ],
             "options": {
                 "cwd": "${workspaceFolder}\\build"

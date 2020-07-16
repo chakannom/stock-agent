@@ -27,7 +27,7 @@
 #pragma once
 
 #include <string>
-#include "std_micro_service.hpp"
+#include "../header/header.hpp"
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
@@ -36,7 +36,7 @@ namespace cfx {
    
    using HostInetInfo = tcp::resolver::iterator;
 
-   class NetworkUtils {
+   class NetworkUtil {
    private:
       static HostInetInfo queryHostInetInfo();
       static std::string hostIP(unsigned short family);
