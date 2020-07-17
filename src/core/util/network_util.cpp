@@ -35,14 +35,17 @@ namespace cfx {
        return resolver.resolve(query);
    }
 
-   std::string NetworkUtil::hostIP(unsigned short family) {
+   std::wstring NetworkUtil::hostIP(unsigned short family) {
        auto hostInetInfo = queryHostInetInfo();
        tcp::resolver::iterator end;
        while(hostInetInfo != end) {
            tcp::endpoint ep = *hostInetInfo++;
            sockaddr sa = *ep.data();
            if (sa.sa_family == family) {
-               return ep.address().to_string();
+                std::string message_a = ep.address().to_string();
+                std::wstring message_w;
+                message_w.assign(message_a.begin(), message_a.end());
+               return message_w;
            }
        }
        return nullptr;

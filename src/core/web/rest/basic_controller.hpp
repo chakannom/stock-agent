@@ -43,8 +43,8 @@ namespace cfx {
         BasicController();
         ~BasicController();
 
-        void setEndpoint(const std::string & value);
-        std::string endpoint() const;
+        void setEndpoint(const std::wstring & value);
+        utility::string_t endpoint() const;
         pplx::task<void> accept();
         pplx::task<void> shutdown();
 

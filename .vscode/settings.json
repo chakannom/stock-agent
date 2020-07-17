@@ -79,6 +79,10 @@
         "xlocmes": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "xtree": "cpp"
-    }
+        "xtree": "cpp",
+        "*.ipp": "cpp",
+        "*.dat": "cpp"
+    },
+    "files.encoding": "euckr",
+    "C_Cpp.errorSquiggles": "Disabled"
 }

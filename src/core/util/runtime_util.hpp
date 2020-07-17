@@ -11,7 +11,7 @@ namespace cfx {
             void * callstack[MAX_CALLSTACK];
             int frames;
 
-            // ìœˆë„ìš°ì— ë§ê²Œ ë³€ê²½í•´ì•¼ í•¨
+            // À©¶ç¿ìt ¸Â°Ô º¯°æÇØ¾ß ÇÔ
                         
             // // get void*'s for all entries on the stack...
             // frames = backtrace(callstack, MAX_CALLSTACK);

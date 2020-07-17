@@ -27,7 +27,7 @@
 #pragma once
 
 #include <string>
-#include "../header/header.hpp"
+#include <core/header/header.hpp>
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
@@ -39,20 +39,23 @@ namespace cfx {
    class NetworkUtil {
    private:
       static HostInetInfo queryHostInetInfo();
-      static std::string hostIP(unsigned short family);
+      static std::wstring hostIP(unsigned short family);
    public:
       // gets the host IP4 string formatted
-      static std::string hostIP4() {
+      static std::wstring hostIP4() {
          return hostIP(AF_INET);
       }
 
       // gets the host IP6 string formatted
-      static std::string hostIP6() {
+      static std::wstring hostIP6() {
 
          return hostIP(AF_INET6);
       }
-      static std::string hostName() {
-         return ip::host_name();
+      static std::wstring hostName() {
+         std::string message_a = ip::host_name();
+         std::wstring message_w;
+         message_w.assign(message_a.begin(), message_a.end());
+         return message_w;
       }
    };
       

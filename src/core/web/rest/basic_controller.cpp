@@ -24,7 +24,7 @@
 // SOFTWARE.
 //
 
-#include "../../core/util/network_util.hpp"
+#include <core/util/network_util.hpp>
 #include "basic_controller.hpp"
 
 namespace cfx {
@@ -35,15 +35,15 @@ namespace cfx {
     BasicController::~BasicController() {
 
     }
-    void BasicController::setEndpoint(const std::string & value) {
+    void BasicController::setEndpoint(const std::wstring & value) {
         uri endpointURI(value);
         uri_builder endpointBuilder;
 
         endpointBuilder.set_scheme(endpointURI.scheme());
-        if (endpointURI.host() == "host_auto_ip4") {
-            endpointBuilder.set_host(NetworkUtil::hostIP4());        
+        if (endpointURI.host() == L"host_auto_ip4") {
+            endpointBuilder.set_host(NetworkUtil::hostIP4());
         }
-        else if (endpointURI.host() == "host_auto_ip6") {
+        else if (endpointURI.host() == L"host_auto_ip6") {
             endpointBuilder.set_host(NetworkUtil::hostIP6());
         }
         endpointBuilder.set_port(endpointURI.port());
@@ -52,7 +52,7 @@ namespace cfx {
         _listener = http_listener(endpointBuilder.to_uri());
     }
 
-    std::string BasicController::endpoint() const {
+    utility::string_t BasicController::endpoint() const {
         return _listener.uri().to_string();
     }
 

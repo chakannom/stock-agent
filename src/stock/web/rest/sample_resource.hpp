@@ -26,14 +26,14 @@
 
 #pragma once 
 
-#include "../../../core/web/rest/basic_controller.hpp"
+#include <core/web/rest/basic_controller.hpp>
 
 using namespace cfx;
 
-class MicroserviceController : public BasicController, Controller {
+class SampleResource : public BasicController, Controller {
 public:
-    MicroserviceController() : BasicController() {}
-    ~MicroserviceController() {}
+    SampleResource() : BasicController() {}
+    ~SampleResource() {}
     void handleGet(http_request message) override;
     void handlePut(http_request message) override;
     void handlePost(http_request message) override;
