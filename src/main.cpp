@@ -13,7 +13,7 @@ int main(int argc, wchar_t *argv[])
     InterruptHandler::hookSIGINT();
 
     SampleResource resource;
-    resource.setEndpoint(L"http://host_auto_ip4:8080/v1/api");
+    resource.setEndpoint(L"http://host_auto_ip4:28080/v1/api");
     
     try {
         // wait for server initialization...
@@ -25,7 +25,7 @@ int main(int argc, wchar_t *argv[])
         resource.shutdown().wait();
     }
     catch(std::exception & e) {
-        std::cerr << "somehitng wrong happen! :(" << std::endl;
+        std::wcerr << "somehitng wrong happen! :(" << std::endl;
     }
     catch(...) {
         RuntimeUtil::printStackTrace();

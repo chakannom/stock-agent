@@ -42,10 +42,7 @@ namespace cfx {
            tcp::endpoint ep = *hostInetInfo++;
            sockaddr sa = *ep.data();
            if (sa.sa_family == family) {
-                std::string message_a = ep.address().to_string();
-                std::wstring message_w;
-                message_w.assign(message_a.begin(), message_a.end());
-               return message_w;
+               return WStringUtil::toWString(ep.address().to_string());
            }
        }
        return nullptr;

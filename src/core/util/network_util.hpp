@@ -28,9 +28,11 @@
 
 #include <string>
 #include <core/header/header.hpp>
+#include <core/util/wstring_util.hpp>
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
+using namespace cks;
 
 namespace cfx {
    
@@ -48,14 +50,10 @@ namespace cfx {
 
       // gets the host IP6 string formatted
       static std::wstring hostIP6() {
-
          return hostIP(AF_INET6);
       }
       static std::wstring hostName() {
-         std::string message_a = ip::host_name();
-         std::wstring message_w;
-         message_w.assign(message_a.begin(), message_a.end());
-         return message_w;
+         return WStringUtil::toWString(ip::host_name());
       }
    };
       
