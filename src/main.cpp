@@ -3,7 +3,7 @@
 #include <core/config/interrupt/interrupt_handler.hpp>
 #include <core/util/runtime_util.hpp>
 
-#include <stock/web/rest/sample_resource.hpp>
+#include <agent/controller/agent_controller.hpp>
 
 using namespace web;
 using namespace cfx;
@@ -12,17 +12,17 @@ int main(int argc, wchar_t *argv[])
 {
     InterruptHandler::hookSIGINT();
 
-    SampleResource resource;
-    resource.setEndpoint(L"http://host_auto_ip4:28080/v1/api");
+    AgentController agentController;
+    agentController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis/");
     
     try {
         // wait for server initialization...
-        resource.accept().wait();
-        std::wcout << "Modern C++ Microservice now listening for requests at: " << resource.endpoint() << '\n';
+        agentController.accept().wait();
+        std::wcout << "StockAgent now listening for requests at: " << agentController.endpoint() << std::endl;
 
         InterruptHandler::waitForUserInterrupt();
 
-        resource.shutdown().wait();
+        agentController.shutdown().wait();
     }
     catch(std::exception & e) {
         std::wcerr << "somehitng wrong happen! :(" << std::endl;

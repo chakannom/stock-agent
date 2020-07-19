@@ -41,7 +41,7 @@ namespace cfx {
 
         static void handleUserInterrupt(int signal){
             if (signal == SIGINT) {
-                std::cout << "SIGINT trapped ..." << '\n';
+                std::wcout << "SIGINT trapped ..." << std::endl;
                 _condition.notify_one();
             }
         }
@@ -49,7 +49,7 @@ namespace cfx {
         static void waitForUserInterrupt() {
             std::unique_lock<std::mutex> lock { _mutex };
             _condition.wait(lock);
-            std::cout << "user has signaled to interrup program..." << '\n';
+            std::wcout << "user has signaled to interrup program..." << std::endl;
             lock.unlock();
         }
     };
