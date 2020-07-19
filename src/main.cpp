@@ -3,7 +3,7 @@
 #include <core/config/interrupt/interrupt_handler.hpp>
 #include <core/util/runtime_util.hpp>
 
-#include <agent/controller/agent_controller.hpp>
+#include <agent/agent_controller.hpp>
 
 using namespace web;
 using namespace cfx;
