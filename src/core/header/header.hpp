@@ -27,6 +27,7 @@
 #pragma once
 
 #define BOOST_SPIRIT_THREADSAFE // enable thread safety to json read on property tree!
+#define _WIN32_WINNT	0x0A00
 
 #include <boost/format.hpp>
 

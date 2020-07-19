@@ -4,14 +4,15 @@
 #include "resource/version_resource.hpp"
 
 using namespace cfx;
+using namespace cks;
 
-class AgentController : public BasicController, Controller {
+class AgentApisController : public BasicController, Controller {
 private:
     VersionResource versionResource;
     json::value responseNotImpl(const http::method & method);
 public:
-    AgentController() : BasicController() {}
-    ~AgentController() {}
+    AgentApisController() : BasicController() {}
+    ~AgentApisController() {}
     void initRestOpHandlers() override; 
     void handleGet(http_request message) override;
     void handlePut(http_request message) override;
