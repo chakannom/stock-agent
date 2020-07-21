@@ -13,7 +13,7 @@ int main(int argc, wchar_t *argv[])
     InterruptHandler::hookSIGINT();
 
     AgentApisController agentApisController;
-    agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis/");
+    agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis");
     
     try {
         // wait for server initialization...

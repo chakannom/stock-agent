@@ -38,7 +38,7 @@ namespace cfx {
    std::wstring NetworkUtil::hostIP(unsigned short family) {
        auto hostInetInfo = queryHostInetInfo();
        tcp::resolver::iterator end;
-       while(hostInetInfo != end) {
+       while (hostInetInfo != end) {
            tcp::endpoint ep = *hostInetInfo++;
            sockaddr sa = *ep.data();
            if (sa.sa_family == family) {

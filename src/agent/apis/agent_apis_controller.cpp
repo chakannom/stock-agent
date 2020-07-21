@@ -1,8 +1,19 @@
 #include <core/header/header.hpp>
+#include <core/util/response_util.hpp>
 #include "agent_apis_controller.hpp"
+#include "resource/version_resource_v1.hpp"
 
 using namespace web;
 using namespace http;
+using namespace cks;
+
+AgentApisController::AgentApisController() : BasicController() {
+    resources.insert(std::pair<std::wstring, Resource*>(VersionResourceV1::KEY, new VersionResourceV1()));
+}
+
+AgentApisController::~AgentApisController() {
+
+}
 
 void AgentApisController::initRestOpHandlers() {
     _listener.support(methods::GET, std::bind(&AgentApisController::handleGet, this, std::placeholders::_1));
@@ -14,10 +25,9 @@ void AgentApisController::initRestOpHandlers() {
 
 void AgentApisController::handleGet(http_request message) {
     auto path = requestPath(message);
-    if (!path.empty()) {
-        if (path[0] == L"version") {
-            versionResource.getVersion(message);
-        }
+
+    if (!path.empty() && path.size() > 1 && resources[path[0] + L"_" + path[1]]) {
+        resources[path[0] + L"_" + path[1]]->handleGet(path, message);
     }
     else {
         message.reply(status_codes::NotFound);
@@ -25,44 +35,37 @@ void AgentApisController::handleGet(http_request message) {
 }
 
 void AgentApisController::handlePatch(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::PATCH));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PATCH));
 }
 
 void AgentApisController::handlePut(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::PUT));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PUT));
 }
 
 void AgentApisController::handlePost(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::POST));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::POST));
 }
 
 void AgentApisController::handleDelete(http_request message) {    
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::DEL));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::DEL));
 }
 
 void AgentApisController::handleHead(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::HEAD));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::HEAD));
 }
 
 void AgentApisController::handleOptions(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::OPTIONS));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::OPTIONS));
 }
 
 void AgentApisController::handleTrace(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::TRCE));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::TRCE));
 }
 
 void AgentApisController::handleConnect(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::CONNECT));
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::CONNECT));
 }
 
 void AgentApisController::handleMerge(http_request message) {
-    message.reply(status_codes::NotImplemented, responseNotImpl(methods::MERGE));
-}
-
-json::value AgentApisController::responseNotImpl(const http::method & method) {
-    auto response = json::value::object();
-    response[L"serviceName"] = json::value::string(L"C++ Mircroservice Sample");
-    response[L"http_method"] = json::value::string(method);
-    return response ;
+    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::MERGE));
 }

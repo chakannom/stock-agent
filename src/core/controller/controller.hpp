@@ -38,7 +38,7 @@ namespace cfx {
     * web serivce handler.
     */
     class Controller {
-    public: 
+    private: 
         virtual void handleGet(http_request message) = 0;
         virtual void handlePut(http_request message) = 0;
         virtual void handlePost(http_request message) = 0;

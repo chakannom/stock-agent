@@ -29,6 +29,12 @@
 #define BOOST_SPIRIT_THREADSAFE // enable thread safety to json read on property tree!
 #define _WIN32_WINNT	0x0A00
 
+#include <string>
+#include <iostream>
+#include <vector>
+#include <map>
+#include <regex>
+
 #include <boost/format.hpp>
 
 #include <boost/log/core.hpp>
@@ -44,8 +50,3 @@
 #include <boost/asio.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include <string>
-#include <iostream>
-#include <vector>
-#include <map>
-#include <regex>
