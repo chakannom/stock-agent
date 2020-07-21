@@ -23,49 +23,49 @@ void AgentApisController::initRestOpHandlers() {
     _listener.support(methods::PATCH, std::bind(&AgentApisController::handlePatch, this, std::placeholders::_1));
 }
 
-void AgentApisController::handleGet(http_request message) {
-    auto path = requestPath(message);
+void AgentApisController::handleGet(http_request request) {
+    auto path = requestPath(request);
 
     if (!path.empty() && path.size() > 1 && resources[path[0] + L"_" + path[1]]) {
-        resources[path[0] + L"_" + path[1]]->handleGet(path, message);
+        resources[path[0] + L"_" + path[1]]->handleGet(path, request);
     }
     else {
-        message.reply(status_codes::NotFound);
+        request.reply(status_codes::NotFound);
     }
 }
 
-void AgentApisController::handlePatch(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PATCH));
+void AgentApisController::handlePatch(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PATCH));
 }
 
-void AgentApisController::handlePut(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PUT));
+void AgentApisController::handlePut(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::PUT));
 }
 
-void AgentApisController::handlePost(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::POST));
+void AgentApisController::handlePost(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::POST));
 }
 
-void AgentApisController::handleDelete(http_request message) {    
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::DEL));
+void AgentApisController::handleDelete(http_request request) {    
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::DEL));
 }
 
-void AgentApisController::handleHead(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::HEAD));
+void AgentApisController::handleHead(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::HEAD));
 }
 
-void AgentApisController::handleOptions(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::OPTIONS));
+void AgentApisController::handleOptions(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::OPTIONS));
 }
 
-void AgentApisController::handleTrace(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::TRCE));
+void AgentApisController::handleTrace(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::TRCE));
 }
 
-void AgentApisController::handleConnect(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::CONNECT));
+void AgentApisController::handleConnect(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::CONNECT));
 }
 
-void AgentApisController::handleMerge(http_request message) {
-    message.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::MERGE));
+void AgentApisController::handleMerge(http_request request) {
+    request.reply(status_codes::NotImplemented, ResponseUtil::responseNotImpl(methods::MERGE));
 }

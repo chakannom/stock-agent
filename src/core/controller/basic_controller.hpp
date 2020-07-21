@@ -52,6 +52,6 @@ namespace cfx {
             /* had to be implemented by the child class */ 
         }
 
-        std::vector<utility::string_t> requestPath(const http_request & message);
+        std::vector<utility::string_t> requestPath(const http_request & request);
     };
 }

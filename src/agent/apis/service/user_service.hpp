@@ -10,12 +10,12 @@ typedef struct {
 } UserInformation;
 
 class UserServiceException : public std::exception {
-   std::string _message;
+   std::string _request;
 public:
-   UserServiceException(const std::string & message) : 
-                         _message(message) { }
+   UserServiceException(const std::string & request) : 
+                         _request(request) { }
    const char * what() const throw() {
-      return _message.c_str();
+      return _request.c_str();
    }
 };
 // alias declaration of our In Memory database...
