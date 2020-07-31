@@ -12,7 +12,9 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}\\build",
-            "environment": [],
+            "environment": [
+                {"name": "PATH", "value": "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\bin;${env:PATH}"}
+            ],
             "externalConsole": false,
             "preLaunchTask": "C/C++: cl.exe build active file"
         }

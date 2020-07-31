@@ -7,6 +7,7 @@
 
 using namespace web;
 using namespace cfx;
+using namespace cks;
 
 int main(int argc, wchar_t *argv[])
 {
