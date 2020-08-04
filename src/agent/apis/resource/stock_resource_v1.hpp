@@ -7,12 +7,12 @@ using namespace web;
 using namespace http;
 using namespace cks;
 
-class VersionResourceV1 : public Resource {
+class StockResourceV1 : public Resource {
 public:
     static const std::wstring KEY;
 public:
-    VersionResourceV1();
-    ~VersionResourceV1();
+    StockResourceV1();
+    ~StockResourceV1();
     void handleGet(std::vector<std::wstring> & path, http_request & request) override;
     void handlePut(std::vector<std::wstring> & path, http_request & request) override;
     void handlePost(std::vector<std::wstring> & path, http_request & request) override;

@@ -3,5 +3,5 @@
 ## dependency library
 - cpprestsdk
 - boost
-- cppdb
+- cppdb v0.3.1
 - sqlite3

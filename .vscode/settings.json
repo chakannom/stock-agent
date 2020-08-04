@@ -81,7 +81,8 @@
         "xloctime": "cpp",
         "xtree": "cpp",
         "*.ipp": "cpp",
-        "*.dat": "cpp"
+        "*.dat": "cpp",
+        "filesystem": "cpp"
     },
     "files.encoding": "euckr",
     "C_Cpp.errorSquiggles": "Disabled"

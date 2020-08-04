@@ -13,11 +13,15 @@ VersionResourceV1::~VersionResourceV1() {
 }
 
 void VersionResourceV1::handleGet(std::vector<std::wstring> & path, http_request & request) {
-    auto response = json::value::object();
-    response[L"version"] = json::value::string(L"0.0.1");
-    response[L"date"] = json::value::string(L"##DATE##");
-    // "Copyright 2020 ChaKanS. All rights reserved."
-    request.reply(status_codes::OK, response);
+    try {
+        auto response = json::value::object();
+        response[L"version"] = json::value::string(L"0.0.1");
+        response[L"date"] = json::value::string(L"##DATE##");
+        // "Copyright 2020 ChaKanS. All rights reserved."
+        request.reply(status_codes::OK, response);
+    } catch (http_exception const & e) {
+        std::wcout << e.what() << std::endl;
+    }
 }
 
 void VersionResourceV1::handlePatch(std::vector<std::wstring> & path, http_request & request) {

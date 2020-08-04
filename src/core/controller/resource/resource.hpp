@@ -8,8 +8,6 @@ using namespace http;
 namespace cks {
     class Resource {
     public:
-        static const std::wstring KEY;
-    public:
         virtual void handleGet(std::vector<std::wstring> & path, http_request & request) = 0;
         virtual void handlePut(std::vector<std::wstring> & path, http_request & request) = 0;
         virtual void handlePost(std::vector<std::wstring> & path, http_request & request) = 0;

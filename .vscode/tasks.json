@@ -24,6 +24,7 @@
                 "${workspaceFolder}\\src\\core\\config\\thirdparty\\cppdb\\drivers\\*.cpp",
                 "${workspaceFolder}\\src\\core\\util\\*.cpp",
                 "${workspaceFolder}\\src\\core\\controller\\*.cpp",
+                "${workspaceFolder}\\src\\agent\\config\\thirdparty\\nh_namu\\*.cpp",
                 "${workspaceFolder}\\src\\agent\\apis\\*.cpp",
                 "${workspaceFolder}\\src\\agent\\apis\\resource\\*.cpp",
                 "${workspaceFolder}\\src\\agent\\apis\\service\\*.cpp",

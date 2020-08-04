@@ -1,6 +1,7 @@
 #include <core/header/header.hpp>
 #include <core/util/response_util.hpp>
 #include "agent_apis_controller.hpp"
+#include "resource/stock_resource_v1.hpp"
 #include "resource/version_resource_v1.hpp"
 
 using namespace web;
@@ -8,6 +9,7 @@ using namespace http;
 using namespace cks;
 
 AgentApisController::AgentApisController() : BasicController() {
+    resources.insert(std::pair<std::wstring, Resource*>(StockResourceV1::KEY, new StockResourceV1()));
     resources.insert(std::pair<std::wstring, Resource*>(VersionResourceV1::KEY, new VersionResourceV1()));
 }
 
