@@ -82,7 +82,8 @@
         "xtree": "cpp",
         "*.ipp": "cpp",
         "*.dat": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "compare": "cpp"
     },
     "files.encoding": "euckr",
     "C_Cpp.errorSquiggles": "Disabled"
