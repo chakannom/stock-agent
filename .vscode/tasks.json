@@ -16,6 +16,7 @@
             "label": "C/C++: cl.exe build active file",
             "command": "cl.exe",
             "args": [
+                "/utf-8",
                 "/Zi",
                 "/EHsc",
                 "/Fe:",

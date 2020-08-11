@@ -1,23 +1,25 @@
 #pragma comment (lib, "user32.lib")
 
 #include <iostream>
-#define WIN32_LEAN_AND_MEAN  // °ÅÀÇ »ç¿ëµÇÁö ¾Ê´Â ³»¿ëÀ» Windows Çì´õ¿¡¼­ Á¦¿ÜÇÕ´Ï´Ù.
+#define WIN32_LEAN_AND_MEAN // ê±°ì˜ ì‚¬ìš©ë˜ì§€ ì•ŠëŠ” ë‚´ìš©ì„ Windows í—¤ë”ì—ì„œ ì œì™¸í•©ë‹ˆë‹¤.
 #include <windows.h>
 
 #include <core/config/interrupt/interrupt_handler.hpp>
 #include <core/util/runtime_util.hpp>
 #include <agent/apis/agent_apis_controller.hpp>
+#include <agent/config/thirdparty/nh_namu/wmca_intf.hpp>
 
 #define IDC_START_BTN 101
 #define IDC_STOP_BTN  102
+#define MAX_LOADSTRING 100
 
 using namespace web;
 using namespace cfx;
 using namespace cks;
 
-HINSTANCE hInst;                                // ÇöÀç ÀÎ½ºÅÏ½º
-WCHAR *szTitle = L"TITLE";                      // Á¦¸ñ Ç¥½ÃÁÙ ÅØ½ºÆ®
-WCHAR *szWindowClass = L"CLASSNAME";            // ±âº» Ã¢ Å¬·¡½º ÀÌ¸§
+HINSTANCE hInst;                                // í˜„ì¬ ì¸ìŠ¤í„´ìŠ¤
+WCHAR szTitle[MAX_LOADSTRING];                  // ì œëª© í‘œì‹œì¤„ í…ìŠ¤íŠ¸
+WCHAR szWindowClass[MAX_LOADSTRING];            // ê¸°ë³¸ ì°½ í´ë˜ìŠ¤ ì´ë¦„
 AgentApisController agentApisController;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -34,14 +36,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MyRegisterClass(hInstance);
 
-    // ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ÃÊ±âÈ­ ¼öÇà
+    // ì• í”Œë¦¬ì¼€ì´ì…˜ ì´ˆê¸°í™” ìˆ˜í–‰
     if (!InitInstance(hInstance, nCmdShow)) {
         return FALSE;
     }
 
     MSG msg;
 
-    // ±âº» ¸Ş½ÃÁö ·çÇÁ
+    // ê¸°ë³¸ ë©”ì‹œì§€ ë£¨í”„
     while (GetMessage(&msg, nullptr, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -50,7 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
-// Ã¢ Å¬·¡½º¸¦ µî·Ï
+// ì°½ í´ë˜ìŠ¤ë¥¼ ë“±ë¡
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
@@ -72,7 +74,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-// ÀÎ½ºÅÏ½º ÇÚµéÀ» ÀúÀåÇÏ°í ÁÖ Ã¢À» ¸¸µê
+// ì¸ìŠ¤í„´ìŠ¤ í•¸ë“¤ì„ ì €ì¥í•˜ê³  ì£¼ ì°½ì„ ë§Œë“¦
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance;
@@ -90,7 +92,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-// ÁÖ Ã¢ÀÇ ¸Ş½ÃÁö¸¦ Ã³¸®
+// ì£¼ ì°½ì˜ ë©”ì‹œì§€ ì²˜ë¦¬
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -106,16 +108,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 switch (LOWORD(wParam)) {
                     case IDC_START_BTN:
                         std::cout << "START" << std::endl;
-                        agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis");
-                        agentApisController.accept().wait();
-                        std::wcout << L"StockAgent now listening for requests at: " << agentApisController.endpoint() << std::endl;
+                        // agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis");
+                        // agentApisController.accept().wait();
+                        // std::wcout << L"StockAgent now listening for requests at: " << agentApisController.endpoint() << std::endl;
                         break;
                     case IDC_STOP_BTN:
                         std::cout << "STOP" << std::endl;
-                        agentApisController.shutdown().wait();
+                        // agentApisController.shutdown().wait();
                         break;
                 }
             }
+            break;
+        case CA_WMCAEVENT:
+            std::cout << "CA_WMCAEVENT" << std::endl;
             break;
         case WM_DESTROY:
             PostQuitMessage(0);

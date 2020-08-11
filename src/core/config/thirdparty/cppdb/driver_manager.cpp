@@ -115,17 +115,17 @@ namespace cppdb {
 	}
 
 	#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(__CYGWIN__)
-	/** ╨Т╣Е©ю╥Ы аж╪╝цЁ╦╝гт (╧л╩Г©К╨н╨п)  **/
+	/** К╧▄К⌠°Л≤╓К╔≤ Лё╪Л└²Л╡≤К╕╛М∙╗ (К╞╦Л┌╛Л ╘К╤─К╤└)  **/
 	// #	define CPPDB_LIBRARY_SUFFIX_V1 "-" CPPDB_SOVERSION CPPDB_LIBRARY_SUFFIX
 	// #	define CPPDB_LIBRARY_SUFFIX_V2 CPPDB_LIBRARY_SUFFIX
 	
 	#elif defined(__APPLE__)
-	/** ╨Т╣Е©ю╥Ы аж╪╝цЁ╦╝гт (╧л╩Г©К╨н╨п)  **/
+	/** К╧▄К⌠°Л≤╓К╔≤ Лё╪Л└²Л╡≤К╕╛М∙╗ (К╞╦Л┌╛Л ╘К╤─К╤└)  **/
 	// #	define CPPDB_LIBRARY_SUFFIX_V1 "." CPPDB_SOVERSION CPPDB_LIBRARY_SUFFIX
 	// #	define CPPDB_LIBRARY_SUFFIX_V2 CPPDB_LIBRARY_SUFFIX
 
 	#else
-	/** ╨Т╣Е©ю╥Ы аж╪╝цЁ╦╝гт (╧л╩Г©К╨н╨п)  **/
+	/** К╧▄К⌠°Л≤╓К╔≤ Лё╪Л└²Л╡≤К╕╛М∙╗ (К╞╦Л┌╛Л ╘К╤─К╤└)  **/
 	// #	define CPPDB_LIBRARY_SUFFIX_V1 CPPDB_LIBRARY_SUFFIX "." CPPDB_SOVERSION
 	// #	define CPPDB_LIBRARY_SUFFIX_V2 CPPDB_LIBRARY_SUFFIX
 
@@ -161,7 +161,7 @@ namespace cppdb {
 			so_names.push_back(module);
 		}
 		else {
-			/** ╨Т╣Е©ю╥Ы аж╪╝цЁ╦╝гт (╧л╩Г©К╨н╨п)  **/
+			/** К╧▄К⌠°Л≤╓К╔≤ Лё╪Л└²Л╡≤К╕╛М∙╗ (К╞╦Л┌╛Л ╘К╤─К╤└)  **/
 			// std::string so_name1 = CPPDB_LIBRARY_PREFIX "cppdb_" + conn.driver + CPPDB_LIBRARY_SUFFIX_V1;
 			// std::string so_name2 = CPPDB_LIBRARY_PREFIX "cppdb_" + conn.driver + CPPDB_LIBRARY_SUFFIX_V2;
 

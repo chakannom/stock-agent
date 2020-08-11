@@ -6,11 +6,10 @@
 #include <windows.h>
 #include "wmca_intf.hpp"
 
-using namespace std;
-
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
+
 WmcaIntf::WmcaIntf():
     m_hDll(NULL),
     m_pLoad(NULL), m_pFree(NULL), m_pSetServer(NULL), m_pSetPort(NULL), m_pIsConnected(NULL),
@@ -18,10 +17,8 @@ WmcaIntf::WmcaIntf():
     m_pDetach(NULL), m_pDetachWindow(NULL), m_pDetachAll(NULL), m_pSetOption(NULL), 
     m_pSetAccountIndexPwd(NULL), m_pSetOrderPwd(NULL), m_pSetHashPwd(NULL), m_pSetAccountNoPwd(NULL), m_pSetAccountNoByIndex(NULL)
 {
-    if(!(m_hDll = LoadLibraryW(L"wmca.dll")))
-    {
-        cout << "WMCA.DLL ?ŒŒ?¼?´ ?—†?Šµ?‹ˆ?‹¤.\n?´ ?ŒŒ?¼?´ ê²½ë¡œ?— ?žˆ?Š”ì§? ?™•?¸?•˜?‹œê¸? ë°”ëž?‹ˆ?‹¤." << endl;
-
+    if(!(m_hDll = LoadLibrary("wmca.dll"))) {
+        std::cout << "WMCA.DLL íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.\nì´ íŒŒì¼ì´ ê²½ë¡œì— ìžˆëŠ”ì§€ í™•ì¸í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤." << std::endl;
         return;
     }
 
@@ -46,26 +43,25 @@ WmcaIntf::WmcaIntf():
     m_pSetAccountNoPwd      = (TSetAccountNoPwd*)        GetProcAddress(m_hDll, "wmcaSetAccountNoPwd");
     m_pSetAccountNoByIndex  = (TSetAccountNoByIndex*)    GetProcAddress(m_hDll, "wmcaSetAccountNoByIndex");
 
+
+
     if(!(m_pLoad && m_pFree && m_pSetServer && m_pSetPort && m_pIsConnected && m_pConnect && m_pDisconnect && m_pTransact && m_pQuery
         && m_pRequest && m_pAttach && m_pDetach && m_pDetachWindow && m_pDetachAll && m_pSetOption 
-        && m_pSetAccountIndexPwd && m_pSetOrderPwd && m_pSetHashPwd && m_pSetAccountNoPwd) && m_pSetAccountNoByIndex)
-    {
-        cout << "WMCA.DLL ?ŒŒ?¼?„ ?¸?‹?•  ?ˆ˜ ?—†?Šµ?‹ˆ?‹¤.\nìµœì‹  ë²„ì „?˜ ? •?ƒ? ?¸ ?ŒŒ?¼?¸ì§? ?™•?¸?•˜?‹œê¸? ë°”ëž?‹ˆ?‹¤." << endl;
-
+        && m_pSetAccountIndexPwd && m_pSetOrderPwd && m_pSetHashPwd && m_pSetAccountNoPwd) && m_pSetAccountNoByIndex) {
+        std::cout << "WMCA.DLL íŒŒì¼ì„ ì¸ì‹í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\nìµœì‹  ë²„ì „ì˜ ì •ìƒì ì¸ íŒŒì¼ì¸ì§€ í™•ì¸í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤." << std::endl;
         return;
     }
 }
 
 WmcaIntf::~WmcaIntf()
 {
-    if(m_hDll)
-    {
+    if(m_hDll) {
         if(m_pFree)
             m_pFree();
 
         FreeLibrary(m_hDll);
 
-        m_hDll =0;
+        m_hDll = 0;
     }
 }
 

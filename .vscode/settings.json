@@ -85,6 +85,7 @@
         "filesystem": "cpp",
         "compare": "cpp"
     },
-    "files.encoding": "euckr",
+    "files.encoding": "utf8",
+    "files.eol": "\n",
     "C_Cpp.errorSquiggles": "Disabled"
 }

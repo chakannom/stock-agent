@@ -1,41 +1,100 @@
 // WmcaIntf.h: interface for the WmcaIntf class.
 //
 //////////////////////////////////////////////////////////////////////
+#pragma once
 
 #ifndef WMCAINTF_HPP
 #define WMCAINTF_HPP
 
-#include <windows.h>
+const DWORD CA_WMCAEVENT        = WM_USER + 8400;
 
-typedef BOOL (__stdcall TLoad               )();
-typedef BOOL (__stdcall TFree               )();
-typedef BOOL (__stdcall TSetServer          )(const char* szServer);
-typedef BOOL (__stdcall TSetPort            )(const int nPort);
-typedef BOOL (__stdcall TIsConnected        )();
-typedef BOOL (__stdcall TConnect            )(HWND hWnd,DWORD dwMsg,char cMediaType,char cUserType,const char* pszID,const char* pszPassword,const char* pszSignPassword);
-typedef BOOL (__stdcall TDisconnect         )();
-typedef BOOL (__stdcall TTransact           )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,int nHeaderType,int nAccountIndex);
-typedef BOOL (__stdcall TQuery              )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,int nAccountIndex);
-typedef BOOL (__stdcall TRequest            )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,const char* pszOpenBranchCode);
-typedef BOOL (__stdcall TAttach             )(HWND hWnd,const char* pszSiseName,const char* pszInputCode,int nInputCodeSize,int nInputCodeTotalSize);
-typedef BOOL (__stdcall TDetach             )(HWND hWnd,const char* pszSiseName,const char* pszInputCode,int nInputCodeSize,int nInputCodeTotalSize);
-typedef BOOL (__stdcall TDetachWindow       )(HWND hWnd);
-typedef BOOL (__stdcall TDetachAll          )();
-typedef BOOL (__stdcall TSetOption          )(const char* szKey,const char* szValue);
-typedef BOOL (__stdcall TSetAccountIndexPwd )(const char* pszHashOut,int nAccountIndex,const char* pszPassword); 
-typedef BOOL (__stdcall TSetOrderPwd        )(const char* pszHashOut,const char* pszPassword);
-typedef BOOL (__stdcall TSetHashPwd         )(const char* pszHashOut,const char* pszKey,const char* pszPassword);
-typedef BOOL (__stdcall TSetAccountNoPwd    )(const char* pszHashOut,const char* pszAccountNo,const char* pszPassword);
-typedef BOOL (__stdcall TSetAccountNoByIndex)(const char* pszHashOut,int nAccountIndex);
+const DWORD CA_CONNECTED        = WM_USER + 110;
+const DWORD CA_DISCONNECTED     = WM_USER + 120;
+const DWORD CA_SOCKETERROR      = WM_USER + 130;
+const DWORD CA_RECEIVEDATA      = WM_USER + 210;
+const DWORD CA_RECEIVESISE      = WM_USER + 220;
+const DWORD CA_RECEIVEMESSAGE   = WM_USER + 230;
+const DWORD CA_RECEIVECOMPLETE  = WM_USER + 240;
+const DWORD CA_RECEIVEERROR     = WM_USER + 250;
+
+typedef BOOL (__stdcall TLoad                   )();
+typedef BOOL (__stdcall TFree                   )();
+typedef BOOL (__stdcall TSetServer              )(const char* szServer);
+typedef BOOL (__stdcall TSetPort                )(const int nPort);
+typedef BOOL (__stdcall TIsConnected            )();
+typedef BOOL (__stdcall TConnect                )(HWND hWnd,DWORD dwMsg,char cMediaType,char cUserType,const char* pszID,const char* pszPassword,const char* pszSignPassword);
+typedef BOOL (__stdcall TDisconnect             )();
+typedef BOOL (__stdcall TTransact               )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,int nHeaderType,int nAccountIndex);
+typedef BOOL (__stdcall TQuery                  )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,int nAccountIndex);
+typedef BOOL (__stdcall TRequest                )(HWND hWnd,int nTransactionID,const char* pszTrCode,const char* pszInputData,int nInputDataSize,const char* pszOpenBranchCode);
+typedef BOOL (__stdcall TAttach                 )(HWND hWnd,const char* pszSiseName,const char* pszInputCode,int nInputCodeSize,int nInputCodeTotalSize);
+typedef BOOL (__stdcall TDetach                 )(HWND hWnd,const char* pszSiseName,const char* pszInputCode,int nInputCodeSize,int nInputCodeTotalSize);
+typedef BOOL (__stdcall TDetachWindow           )(HWND hWnd);
+typedef BOOL (__stdcall TDetachAll              )();
+typedef BOOL (__stdcall TSetOption              )(const char* szKey,const char* szValue);
+typedef BOOL (__stdcall TSetAccountIndexPwd     )(const char* pszHashOut,int nAccountIndex,const char* pszPassword); 
+typedef BOOL (__stdcall TSetOrderPwd            )(const char* pszHashOut,const char* pszPassword);
+typedef BOOL (__stdcall TSetHashPwd             )(const char* pszHashOut,const char* pszKey,const char* pszPassword);
+typedef BOOL (__stdcall TSetAccountNoPwd        )(const char* pszHashOut,const char* pszAccountNo,const char* pszPassword);
+typedef BOOL (__stdcall TSetAccountNoByIndex    )(const char* pszHashOut,int nAccountIndex);
+
+//----------------------------------------------------------------------//
+// WMCA_CONNECTED ë¡œê·¸ì¸ êµ¬ì¡°ì²´
+//----------------------------------------------------------------------//
+typedef struct {
+    char szAccountNo[11];       //ê³„ì¢Œë²ˆí˜¸
+    char szAccountName[40];     //ê³„ì¢Œëª…
+    char act_pdt_cdz3[3];       //ìƒí’ˆì½”ë“œ
+    char amn_tab_cdz4[4];       //ê´€ë¦¬ì ì½”ë“œ
+    char expr_datez8[8];        //ìœ„ì„ë§Œê¸°ì¼
+    char granted;               //ì¼ê´„ì£¼ë¬¸ í—ˆìš©ê³„ì¢Œ(G:í—ˆìš©)
+    char filler[189];           //filler
+}ACCOUNTINFO;
+
+typedef struct {
+    char szDate[14];                // ì ‘ì†ì‹œê°
+    char szServerName[15];          // ì ‘ì†ì„œë²„
+    char szUserID [8];              // ì ‘ì†ìID
+    char szAccountCount[3];         // ê³„ì¢Œìˆ˜
+    ACCOUNTINFO accountlist[999];   // ê³„ì¢Œëª©ë¡
+}LOGININFO;
+
+typedef struct{
+    int TrIndex;
+    LOGININFO *pLoginInfo;
+}LOGINBLOCK;
+
+//----------------------------------------------------------------------//
+// WMCA ë¬¸ìmessage êµ¬ì¡°ì²´
+//----------------------------------------------------------------------//
+typedef struct  {
+    char msg_cd[5];     //00000:ì •ìƒ, ê¸°íƒ€:ë¹„ì •ìƒ(í•´ë‹¹ ì½”ë“œê°’ì„ ì´ìš©í•˜ì—¬ ì½”ë”©í•˜ì§€ ë§ˆì„¸ìš”. ì½”ë“œê°’ì€ ì–¸ì œë“ ì§€ ë³€ê²½ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.)
+    char user_msg[80];
+} MSGHEADER;
+
+         
+//----------------------------------------------------------------------//
+// WMCA TR ì‘ë‹µ êµ¬ì¡°ì²´
+//----------------------------------------------------------------------//
+
+typedef struct {
+    char* szBlockName;
+    char* szData;
+    int nLen;
+} RECEIVED;
+
+typedef struct {
+    int TrIndex;
+    RECEIVED* pData;
+} OUTDATABLOCK;
 
 //----------------------------------------------------------------------//
 // wmca.dll wrapping functions
 //----------------------------------------------------------------------//
-
-class WmcaIntf
+class WmcaIntf  
 {
 private:
-    HINSTANCE               m_hDll;
+    HINSTANCE       m_hDll;
 
     TLoad                   *m_pLoad;
     TFree                   *m_pFree;
@@ -61,28 +120,27 @@ private:
 public:
     WmcaIntf();
     virtual ~WmcaIntf();
-
 public:
     BOOL Load               ();
     BOOL Free               ();
-    BOOL Connect            (HWND hWnd, DWORD msg, char MediaType,char UserType,const char* szID,const char* szPW, const char* szCertPW);  // ?‚¬?š©? ?¸ì¦? ë°? ? ‘?†
+    BOOL Connect            (HWND hWnd, DWORD msg, char MediaType,char UserType,const char* szID,const char* szPW, const char* szCertPW);				//ì‚¬ìš©ì ì¸ì¦ ë° ì ‘ì†
     BOOL Disconnect         ();
-    BOOL SetServer          (const char* szServer);  // ? ‘?†?„œë²? ì§?? •(?•„?š”?‹œ)
-    BOOL SetPort            (int port);  // ? ‘?†?¬?Š¸ ì§?? •(?•„?š”?‹œ)
+    BOOL SetServer          (const char* szServer);																										//ì ‘ì†ì„œë²„ ì§€ì •(í•„ìš”ì‹œ)
+    BOOL SetPort            (int port);																													//ì ‘ì†í¬íŠ¸ ì§€ì •(í•„ìš”ì‹œ)
     BOOL IsConnected        ();
-    BOOL Transact           (HWND hWnd, int nTRID, const char* szTRCode, const char* szInput, int nInputLen, int nHeadType=0, int nAccountIndex=0);  // ?‹¤?ˆ˜ë¥? ë°©ì???•˜? ¤ë©? Transact()????‹ 
-    BOOL Query              (HWND hWnd, int nTRID, const char* szTRCode, const char* szInput, int nInputLen, int nAccountIndex=0);  // Query()?•¨?ˆ˜ë¥? ?‚¬?š©?•˜?„¸?š”.
+    BOOL Transact           (HWND hWnd, int nTRID, const char* szTRCode, const char* szInput, int nInputLen, int nHeadType=0, int nAccountIndex=0);		//ì‹¤ìˆ˜ë¥¼ ë°©ì§€í•˜ë ¤ë©´ Transact()ëŒ€ì‹ 
+    BOOL Query              (HWND hWnd, int nTRID, const char* szTRCode, const char* szInput, int nInputLen, int nAccountIndex=0);						//Query()í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”.
     BOOL Request            (HWND hWnd, int nTRID, const char* szTRCode, const char* szInput, int nInputLen, const char* szOpenBranchCode=NULL);
-    BOOL Attach             (HWND hWnd, const char* szBCType, const char* szInput, int nCodeLen, int nInputLen);  // ?‹¤?‹œê°? ?‹œ?„¸ ?š”ì²?
-    BOOL Detach             (HWND hWnd, const char* szBCType, const char* szInput, int nCodeLen, int nInputLen);  // ?‹¤?‹œê°? ?‹œ?„¸ ì·¨ì†Œ
-    BOOL DetachWindow       (HWND hWnd);  // ?‹¤?‹œê°? ?‹œ?„¸ ?¼ê´„ì·¨?†Œ(?œˆ?„?š°?‹¨?œ„)
-    BOOL DetachAll          ();  // ?‹¤?‹œê°? ?‹œ?„¸ ?¼ê´„ì·¨?†Œ(? „ì²?)
+    BOOL Attach             (HWND hWnd, const char* szBCType, const char* szInput, int nCodeLen, int nInputLen);	//ì‹¤ì‹œê°„ ì‹œì„¸ ìš”ì²­
+    BOOL Detach             (HWND hWnd, const char* szBCType, const char* szInput, int nCodeLen, int nInputLen);	//ì‹¤ì‹œê°„ ì‹œì„¸ ì·¨ì†Œ
+    BOOL DetachWindow       (HWND hWnd);																			//ì‹¤ì‹œê°„ ì‹œì„¸ ì¼ê´„ì·¨ì†Œ(ìœˆë„ìš°ë‹¨ìœ„)
+    BOOL DetachAll          ();																						//ì‹¤ì‹œê°„ ì‹œì„¸ ì¼ê´„ì·¨ì†Œ(ì „ì²´)
     BOOL SetOption          (const char* szKey,const char* szValue);
-    BOOL SetAccountIndexPwd (const char* pszHashOut,int nAccountIndex,const char* pszPassword);  // ê³„ì¢Œ?¸?±?Š¤ ë°? ë¹„ë??ë²ˆí˜¸ ?…? ¥
-    BOOL SetOrderPwd        (const char* pszHashOut,const char* pszPassword);  // ê±°ë˜ë¹„ë??ë²ˆí˜¸ ?…? ¥
-    BOOL SetAccountNoPwd    (const char* pszHashOut,const char* pszAccountNo,const char* pszPassword);  //ê³„ì¢Œë²ˆí˜¸ ë°? ë¹„ë??ë²ˆí˜¸ ?…? ¥
-    BOOL SetHashPwd         (const char* pszHashOut,const char* pszKey,const char* pszPassword);
-    BOOL SetAccountNoByIndex(const char* pszHashOut,int nAccountIndex);  // ê³„ì¢Œ?¸?±?Š¤?— ?•´?‹¹?•˜?Š” ê³„ì¢Œë²ˆí˜¸
+    BOOL SetAccountIndexPwd (const char* pszHashOut,int nAccountIndex,const char* pszPassword);						//ê³„ì¢Œì¸ë±ìŠ¤ ë° ë¹„ë°€ë²ˆí˜¸ ì…ë ¥
+    BOOL SetOrderPwd        (const char* pszHashOut,const char* pszPassword);										//ê±°ë˜ë¹„ë°€ë²ˆí˜¸ ì…ë ¥
+    BOOL SetAccountNoPwd    (const char* pszHashOut,const char* pszAccountNo,const char* pszPassword);				//ê³„ì¢Œë²ˆí˜¸ ë° ë¹„ë°€ë²ˆí˜¸ ì…ë ¥
+    BOOL SetHashPwd         (const char* pszHashOut,const char* pszKey,const char* pszPassword);		
+    BOOL SetAccountNoByIndex(const char* pszHashOut,int nAccountIndex);						//ê³„ì¢Œì¸ë±ìŠ¤ì— í•´ë‹¹í•˜ëŠ” ê³„ì¢Œë²ˆí˜¸
 };
 
 
