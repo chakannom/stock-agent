@@ -29,6 +29,7 @@
                 "${workspaceFolder}\\src\\agent\\apis\\*.cpp",
                 "${workspaceFolder}\\src\\agent\\apis\\resource\\*.cpp",
                 "${workspaceFolder}\\src\\agent\\apis\\service\\*.cpp",
+                "${workspaceFolder}\\src\\win_app\\*.cpp",
                 "${workspaceFolder}\\src\\main.cpp",
                 "/I",
                 "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\include",

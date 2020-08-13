@@ -1,8 +1,7 @@
 #pragma comment (lib, "user32.lib")
 
 #include <iostream>
-#define WIN32_LEAN_AND_MEAN // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
-#include <windows.h>
+#include <win_app/win_app.hpp>
 
 #include <core/config/interrupt/interrupt_handler.hpp>
 #include <core/util/runtime_util.hpp>
@@ -31,65 +30,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+	WinApp winApp(hInstance, hPrevInstance, lpCmdLine, nCmdShow, szWindowClass);
 
-    MyRegisterClass(hInstance);
+	winApp.registerWndClass(WndProc);
 
-    // 애플리케이션 초기화 수행
-    if (!InitInstance(hInstance, nCmdShow)) {
+	// 애플리케이션 초기화 수행
+	if (!winApp.initInstance(szTitle)) {
         return FALSE;
     }
 
-    MSG msg;
-
-    // 기본 메시지 루프
-    while (GetMessage(&msg, nullptr, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return (int) msg.wParam;
-}
-
-// 창 클래스를 등록
-ATOM MyRegisterClass(HINSTANCE hInstance)
-{
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(nullptr, IDI_APPLICATION);
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = nullptr;
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(nullptr, IDI_APPLICATION);
-
-    return RegisterClassExW(&wcex);
-}
-
-// 인스턴스 핸들을 저장하고 주 창을 만듦
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-   hInst = hInstance;
-
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-   if (!hWnd) {
-      return FALSE;
-   }
-
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
-
-   return TRUE;
+	return winApp.messageLoop();
 }
 
 // 주 창의 메시지 처리
