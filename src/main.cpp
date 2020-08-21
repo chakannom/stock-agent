@@ -17,8 +17,8 @@ using namespace cfx;
 using namespace cks;
 
 HINSTANCE hInst;                                // 현재 인스턴스
-WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트
-WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름
+WCHAR szTitle[MAX_LOADSTRING] = L"TEST";                  // 제목 표시줄 텍스트
+WCHAR szWindowClass[MAX_LOADSTRING] = L"TEST";           // 기본 창 클래스 이름
 AgentApisController agentApisController;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
