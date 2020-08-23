@@ -118,6 +118,9 @@
     <Filter Include="헤더 파일\core\config\thirdparty\cppdb">
       <UniqueIdentifier>{8581ea55-944c-4163-8a7b-b2e51596956c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\core\config\logger">
+      <UniqueIdentifier>{7024d62f-4c2a-4031-95ce-59c889546ea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\agent\apis\agent_apis_controller.cpp">
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\agent\config\global_variable.cpp">
+      <Filter>소스 파일\agent\config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,10 +284,17 @@
     <ClInclude Include="src\win_app\win_app.hpp">
       <Filter>헤더 파일\win_app</Filter>
     </ClInclude>
+    <ClInclude Include="src\agent\config\global_variable.hpp">
+      <Filter>헤더 파일\agent\config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\logger\logger_handler.hpp">
+      <Filter>헤더 파일\core\config\logger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="log4cxx.conf" />
   </ItemGroup>
 </Project>

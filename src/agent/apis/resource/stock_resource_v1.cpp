@@ -1,11 +1,16 @@
 #include <core/header/header.hpp>
+
+#include <agent/config/global_variable.hpp>
 #include <agent/config/thirdparty/nh_namu/wmca_intf.hpp>
+
 #include "stock_resource_v1.hpp"
 
 using namespace web;
 using namespace http;
 
 const std::wstring StockResourceV1::KEY = L"stock_v1";
+
+WmcaIntf wmcaIntf;
 
 StockResourceV1::StockResourceV1() {
 }
@@ -16,6 +21,8 @@ StockResourceV1::~StockResourceV1() {
 void StockResourceV1::handleGet(std::vector<std::wstring> & path, http_request & request) {
     if (path[2] == L"test") {
         WmcaIntf wmcaIntf;
+        GlobalVariable* globalVariable = GlobalVariable::getInstance();
+        globalVariable->getHwnd();
     }
 }
 

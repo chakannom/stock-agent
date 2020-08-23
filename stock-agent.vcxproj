@@ -24,6 +24,7 @@
     <ClCompile Include="src\agent\apis\resource\version_resource_v1.cpp" />
     <ClCompile Include="src\agent\apis\service\user_service.cpp" />
     <ClCompile Include="src\agent\config\database_configuration.cpp" />
+    <ClCompile Include="src\agent\config\global_variable.cpp" />
     <ClCompile Include="src\agent\config\thirdparty\nh_namu\wmca_intf.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\atomic_counter.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\backend.cpp" />
@@ -48,8 +49,10 @@
     <ClInclude Include="src\agent\apis\resource\stock_resource_v1.hpp" />
     <ClInclude Include="src\agent\apis\resource\version_resource_v1.hpp" />
     <ClInclude Include="src\agent\apis\service\user_service.hpp" />
+    <ClInclude Include="src\agent\config\global_variable.hpp" />
     <ClInclude Include="src\agent\config\thirdparty\nh_namu\wmca_intf.hpp" />
     <ClInclude Include="src\core\config\interrupt\interrupt_handler.hpp" />
+    <ClInclude Include="src\core\config\logger\logger_handler.hpp" />
     <ClInclude Include="src\core\config\thirdparty\cppdb\atomic_counter.hpp" />
     <ClInclude Include="src\core\config\thirdparty\cppdb\backend.hpp" />
     <ClInclude Include="src\core\config\thirdparty\cppdb\connection_specific.hpp" />
@@ -77,6 +80,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include=".gitignore" />
+    <None Include="log4cxx.conf" />
     <None Include="README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

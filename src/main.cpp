@@ -3,8 +3,10 @@
 #include <iostream>
 #include <win_app/win_app.hpp>
 
-#include <core/config/interrupt/interrupt_handler.hpp>
+#include <core/config/logger/logger_handler.hpp>
 #include <core/util/runtime_util.hpp>
+
+#include <agent/config/global_variable.hpp>
 #include <agent/apis/agent_apis_controller.hpp>
 #include <agent/config/thirdparty/nh_namu/wmca_intf.hpp>
 
@@ -30,25 +32,32 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-	WinApp winApp(hInstance, hPrevInstance, lpCmdLine, nCmdShow, szWindowClass);
+    // Initialization
+    LoggerHandler::initialize(L"log4cxx.conf");
 
-	winApp.registerWndClass(WndProc);
+    WinApp winApp(hInstance, hPrevInstance, lpCmdLine, nCmdShow, szWindowClass);
 
-	// 애플리케이션 초기화 수행
-	if (!winApp.initInstance(szTitle)) {
+    winApp.registerWndClass(WndProc);
+
+    // 애플리케이션 초기화 수행
+    if (!winApp.initInstance(szTitle)) {
         return FALSE;
     }
 
-	return winApp.messageLoop();
+    return winApp.messageLoop();
 }
 
 // 주 창의 메시지 처리
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    LoggerPtr log = Logger::getLogger("WndProc");
+    LOG4CXX_DEBUG(log, message);
     switch (message)
     {
         case WM_CREATE:
             {
+                GlobalVariable* globalVariable = GlobalVariable::getInstance();
+                globalVariable->setHwnd(hWnd);
                 SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(IDC_START_BTN, BN_CLICKED), (LPARAM)0);
                 SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(IDC_STOP_BTN, BN_CLICKED), (LPARAM)0);
             }
@@ -57,20 +66,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 switch (LOWORD(wParam)) {
                     case IDC_START_BTN:
-                        std::cout << "START" << std::endl;
-                        // agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis");
-                        // agentApisController.accept().wait();
-                        // std::wcout << L"StockAgent now listening for requests at: " << agentApisController.endpoint() << std::endl;
+                        {
+                            LOG4CXX_DEBUG(log, "START");
+                            try {
+                                agentApisController.setEndpoint(L"http://host_auto_ip4:28080/agent/apis");
+                                agentApisController.accept().wait();
+                            }
+                            catch (std::exception& e) {
+                                LOG4CXX_DEBUG(log, "ERROR");
+                            }
+                            LOG4CXX_DEBUG(log, agentApisController.endpoint());
+                            // std::wcout << L"StockAgent now listening for requests at: " << agentApisController.endpoint() << std::endl;
+                        }
                         break;
                     case IDC_STOP_BTN:
-                        std::cout << "STOP" << std::endl;
+                        LOG4CXX_DEBUG(log, "STOP");
                         // agentApisController.shutdown().wait();
                         break;
                 }
             }
             break;
         case CA_WMCAEVENT:
-            std::cout << "CA_WMCAEVENT" << std::endl;
+            LOG4CXX_DEBUG(log, "CA_WMCAEVENT");
             break;
         case WM_DESTROY:
             PostQuitMessage(0);
