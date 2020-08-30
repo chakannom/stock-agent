@@ -1,13 +1,13 @@
 {
     "version": "2.0.0",
     "options": {
-          "shell": {
-              "executable": "C:\\Windows\\System32\\cmd.exe",
-              "args": [
-                  "/d", "/c",
-                  "C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars32.bat",
-                  "&&"
-              ]
+        "shell": {
+            "executable": "C:\\Windows\\System32\\cmd.exe",
+            "args": [
+                "/d", "/c",
+                "C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars32.bat",
+                "&&"
+            ]
         }
     },
     "tasks": [
@@ -24,13 +24,10 @@
                 "${workspaceFolder}\\src\\core\\config\\thirdparty\\cppdb\\*.cpp",
                 "${workspaceFolder}\\src\\core\\config\\thirdparty\\cppdb\\drivers\\*.cpp",
                 "${workspaceFolder}\\src\\core\\util\\*.cpp",
-                "${workspaceFolder}\\src\\core\\controller\\*.cpp",
-                "${workspaceFolder}\\src\\agent\\config\\thirdparty\\nh_namu\\*.cpp",
-                "${workspaceFolder}\\src\\agent\\apis\\*.cpp",
-                "${workspaceFolder}\\src\\agent\\apis\\resource\\*.cpp",
-                "${workspaceFolder}\\src\\agent\\apis\\service\\*.cpp",
-                "${workspaceFolder}\\src\\win_app\\*.cpp",
-                "${workspaceFolder}\\src\\main.cpp",
+                "${workspaceFolder}\\src\\stock\\*.cpp",
+                "${workspaceFolder}\\src\\version\\*.cpp",
+                "${workspaceFolder}\\src\\initializer.cpp",
+                "${workspaceFolder}\\src\\application.cpp",
                 "/I",
                 "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\include",
                 "/I",

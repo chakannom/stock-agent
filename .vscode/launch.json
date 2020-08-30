@@ -13,7 +13,10 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}\\build",
             "environment": [
-                {"name": "PATH", "value": "C:\\Users\\chakannom\\Development\\workspace\\finance\\stock-agent\\library\\nh_namu;C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\bin;${env:PATH}"}
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}${workspaceFolder}\\library\\nh_namu;C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\bin;${env:PATH}"
+                }
             ],
             "externalConsole": false,
             "preLaunchTask": "C/C++: cl.exe build active file"
