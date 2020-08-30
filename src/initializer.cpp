@@ -6,7 +6,7 @@
 
 #include "initializer.hpp"
 
-std::wstring Initializer::url = L"http://localhost:28080/agent";
+std::wstring Initializer::url = L"http://host_auto_ip4:28080/agent";
 std::atomic<Initializer*> Initializer::instance;
 std::mutex Initializer::initializerMutex;
 

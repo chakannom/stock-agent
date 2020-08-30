@@ -17,7 +17,7 @@ WmcaIntf::WmcaIntf():
     m_pDetach(NULL), m_pDetachWindow(NULL), m_pDetachAll(NULL), m_pSetOption(NULL), 
     m_pSetAccountIndexPwd(NULL), m_pSetOrderPwd(NULL), m_pSetHashPwd(NULL), m_pSetAccountNoPwd(NULL), m_pSetAccountNoByIndex(NULL)
 {
-    if(!(m_hDll = LoadLibrary(L"wmca.dll"))) {
+    if(!(m_hDll = LoadLibraryW(L"wmca.dll"))) {
         std::wcout << L"WMCA.DLL 파일이 없습니다.\n이 파일이 경로에 있는지 확인하시기 바랍니다." << std::endl;
         return;
     }

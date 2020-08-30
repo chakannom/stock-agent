@@ -1,3 +1,5 @@
+#pragma comment(lib, "user32.lib")
+
 #include <iostream>
 #include <string>
 #include <thread>
@@ -18,7 +20,7 @@ std::wstring WmcaIntfHelper::getTest(WmcaIntf & wmcaIntf) {
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT CALLBACK {
+    wcex.lpfnWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
         std::wcout << L"lpfnWndProc : " << message << std::endl;
         switch (message) {
             case WM_USER + 0x1000:
@@ -96,8 +98,8 @@ std::wstring WmcaIntfHelper::getTest(WmcaIntf & wmcaIntf) {
 
     MSG msg = {};
 
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        DispatchMessage(&msg);
+    while (GetMessageW(&msg, NULL, 0, 0)) {
+        DispatchMessageW(&msg);
     }
 
     std::wstring message(test);

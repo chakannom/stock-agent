@@ -15,7 +15,7 @@
             "environment": [
                 {
                     "name": "PATH",
-                    "value": "${workspaceFolder}${workspaceFolder}\\library\\nh_namu;C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\bin;${env:PATH}"
+                    "value": "${workspaceFolder}\\library\\nh_namu;C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\bin;${env:PATH}"
                 }
             ],
             "externalConsole": false,
