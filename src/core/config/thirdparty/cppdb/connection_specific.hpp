@@ -21,23 +21,23 @@
 #include "defs.hpp"
 
 namespace cppdb {
-	///
-	/// \brief Special abstract object that holds a connection specific data
-	///
-	/// The user is expected to derive its own object from this class
-	/// and save them withing the connection
-	///
-	class CPPDB_API connection_specific_data {
-		connection_specific_data(connection_specific_data const &);
-		void operator=(connection_specific_data const &);
-	public:
-		connection_specific_data();
-		virtual ~connection_specific_data();
+    ///
+    /// \brief Special abstract object that holds a connection specific data
+    ///
+    /// The user is expected to derive its own object from this class
+    /// and save them withing the connection
+    ///
+    class CPPDB_API connection_specific_data {
+        connection_specific_data(connection_specific_data const &);
+        void operator=(connection_specific_data const &);
+    public:
+        connection_specific_data();
+        virtual ~connection_specific_data();
 
-	private:
-		struct data;
-		std::auto_ptr<data> d;
-	};
+    private:
+        struct data;
+        std::auto_ptr<data> d;
+    };
 
 
 } // cppdb

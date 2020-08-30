@@ -29,6 +29,7 @@
 #include <string>
 #include <cpprest/http_listener.h>
 #include <pplx/pplxtasks.h>
+
 #include "controller.hpp"
 
 using namespace web;
@@ -40,8 +41,8 @@ namespace cfx {
         http_listener _listener; // main micro service network endpoint
 
     public:
-        BasicController();
-        ~BasicController();
+        BasicController() {};
+        ~BasicController() {};
 
         void setEndpoint(const std::wstring & value);
         utility::string_t endpoint() const;

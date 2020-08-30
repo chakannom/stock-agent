@@ -9,10 +9,10 @@ using namespace log4cxx;
 using namespace log4cxx::helpers;
 
 namespace cks {
-	class LoggerHandler {
-	public:
-		static void initialize(const wchar_t* conf_path) {
-			PropertyConfigurator::configure(File(conf_path));
-		}
-	};
+    class LoggerHandler {
+    public:
+        static void initialize(const wchar_t* conf_path) {
+            PropertyConfigurator::configure(File(conf_path));
+        }
+    };
 }

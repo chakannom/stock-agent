@@ -31,9 +31,6 @@
     <Filter Include="소스 파일\agent\apis\resource">
       <UniqueIdentifier>{966eec79-2732-464d-8ca0-f78e7521949d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\agent\apis\service">
-      <UniqueIdentifier>{9cbd9bb9-8307-4a99-836d-2684fe947e55}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\agent\config\thirdparty">
       <UniqueIdentifier>{ec8495a2-55e2-41cc-9009-ddb9a90fd061}</UniqueIdentifier>
     </Filter>
@@ -64,9 +61,6 @@
     <Filter Include="소스 파일\core\config\thirdparty\cppdb\drivers">
       <UniqueIdentifier>{a83e67ea-a814-4c41-b11f-b3988ac2d12d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\core\controller\resource">
-      <UniqueIdentifier>{505fad6c-321f-4b51-8f31-0069cc131352}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\agent">
       <UniqueIdentifier>{fa64da75-cced-4982-9595-b13f8c961a85}</UniqueIdentifier>
     </Filter>
@@ -78,9 +72,6 @@
     </Filter>
     <Filter Include="헤더 파일\agent\apis">
       <UniqueIdentifier>{1f796351-4230-4473-9b14-2ed53c9dff14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\agent\apis\service">
-      <UniqueIdentifier>{ae377b67-53ad-413c-88ba-a66eca273a0a}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\agent\apis\resource">
       <UniqueIdentifier>{48f57ba4-8d75-4001-93ec-21675426d445}</UniqueIdentifier>
@@ -106,9 +97,6 @@
     <Filter Include="헤더 파일\core\util">
       <UniqueIdentifier>{585ab83b-2335-4da6-8d87-0397d608de6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\core\controller\resource">
-      <UniqueIdentifier>{571c49c8-2b33-43dc-9f4b-e423f2ba4de8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\core\config\interrupt">
       <UniqueIdentifier>{27612ccc-190d-476e-842b-f6a7bc710a02}</UniqueIdentifier>
     </Filter>
@@ -121,19 +109,28 @@
     <Filter Include="헤더 파일\core\config\logger">
       <UniqueIdentifier>{7024d62f-4c2a-4031-95ce-59c889546ea6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\version">
+      <UniqueIdentifier>{e9e32c58-c4e0-444d-9e0b-ad908612cf6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\version">
+      <UniqueIdentifier>{03aff1b1-e3be-487c-b2b1-d79877fc5e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\stock">
+      <UniqueIdentifier>{7822e4b0-31ad-4848-a31a-08fcf5ae2908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\stock">
+      <UniqueIdentifier>{a3a020cd-d1c7-4ef2-b2ee-393b473c0897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\sample">
+      <UniqueIdentifier>{7c50bc7c-4aa7-4ab0-a729-5dcf5531c589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\sample">
+      <UniqueIdentifier>{abc7cd11-e81f-482f-a11b-4066406db7e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\agent\apis\agent_apis_controller.cpp">
-      <Filter>소스 파일\agent\apis</Filter>
-    </ClCompile>
     <ClCompile Include="src\agent\apis\resource\stock_resource_v1.cpp">
       <Filter>소스 파일\agent\apis\resource</Filter>
-    </ClCompile>
-    <ClCompile Include="src\agent\apis\resource\version_resource_v1.cpp">
-      <Filter>소스 파일\agent\apis\resource</Filter>
-    </ClCompile>
-    <ClCompile Include="src\agent\apis\service\user_service.cpp">
-      <Filter>소스 파일\agent\apis\service</Filter>
     </ClCompile>
     <ClCompile Include="src\agent\config\thirdparty\nh_namu\wmca_intf.cpp">
       <Filter>소스 파일\agent\config\thirdparty\nh_namu</Filter>
@@ -189,25 +186,25 @@
     <ClCompile Include="src\win_app\win_app.cpp">
       <Filter>소스 파일\win_app</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\application.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\agent\config\global_variable.cpp">
-      <Filter>소스 파일\agent\config</Filter>
+    <ClCompile Include="src\initializer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\version\version_rest_controller.cpp">
+      <Filter>소스 파일\version</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_rest_controller.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sample\user_service.cpp">
+      <Filter>소스 파일\sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\agent\apis\resource\stock_resource_v1.hpp">
       <Filter>헤더 파일\agent\apis\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="src\agent\apis\resource\version_resource_v1.hpp">
-      <Filter>헤더 파일\agent\apis\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="src\agent\apis\service\user_service.hpp">
-      <Filter>헤더 파일\agent\apis\service</Filter>
-    </ClInclude>
-    <ClInclude Include="src\agent\apis\agent_apis_controller.hpp">
-      <Filter>헤더 파일\agent\apis</Filter>
     </ClInclude>
     <ClInclude Include="src\agent\config\thirdparty\nh_namu\wmca_intf.hpp">
       <Filter>헤더 파일\agent\config\thirdparty\nh_namu</Filter>
@@ -226,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="src\core\header\header.hpp">
       <Filter>헤더 파일\core\header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\core\controller\resource\resource.hpp">
-      <Filter>헤더 파일\core\controller\resource</Filter>
     </ClInclude>
     <ClInclude Include="src\core\controller\basic_controller.hpp">
       <Filter>헤더 파일\core\controller</Filter>
@@ -284,11 +278,20 @@
     <ClInclude Include="src\win_app\win_app.hpp">
       <Filter>헤더 파일\win_app</Filter>
     </ClInclude>
-    <ClInclude Include="src\agent\config\global_variable.hpp">
-      <Filter>헤더 파일\agent\config</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\config\logger\logger_handler.hpp">
       <Filter>헤더 파일\core\config\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\version\version_rest_controller.hpp">
+      <Filter>헤더 파일\version</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_rest_controller.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sample\user_service.hpp">
+      <Filter>헤더 파일\sample</Filter>
+    </ClInclude>
+    <ClInclude Include="src\initializer.hpp">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,10 +36,10 @@ namespace cfx {
     class InterruptHandler {
     public:
         static void hookSIGINT() {
-            signal(SIGINT, handleUserInterrupt);        
+            signal(SIGINT, handleUserInterrupt);
         }
 
-        static void handleUserInterrupt(int signal){
+        static void handleUserInterrupt(int signal) {
             if (signal == SIGINT) {
                 std::wcout << "SIGINT trapped ..." << std::endl;
                 _condition.notify_one();

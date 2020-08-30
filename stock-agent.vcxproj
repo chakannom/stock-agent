@@ -19,12 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\agent\apis\agent_apis_controller.cpp" />
     <ClCompile Include="src\agent\apis\resource\stock_resource_v1.cpp" />
-    <ClCompile Include="src\agent\apis\resource\version_resource_v1.cpp" />
-    <ClCompile Include="src\agent\apis\service\user_service.cpp" />
     <ClCompile Include="src\agent\config\database_configuration.cpp" />
-    <ClCompile Include="src\agent\config\global_variable.cpp" />
     <ClCompile Include="src\agent\config\thirdparty\nh_namu\wmca_intf.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\atomic_counter.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\backend.cpp" />
@@ -41,15 +37,15 @@
     <ClCompile Include="src\core\config\thirdparty\cppdb\utils.cpp" />
     <ClCompile Include="src\core\controller\basic_controller.cpp" />
     <ClCompile Include="src\core\util\network_util.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\initializer.cpp" />
+    <ClCompile Include="src\sample\user_service.cpp" />
+    <ClCompile Include="src\stock\stock_rest_controller.cpp" />
+    <ClCompile Include="src\version\version_rest_controller.cpp" />
     <ClCompile Include="src\win_app\win_app.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\agent\apis\agent_apis_controller.hpp" />
     <ClInclude Include="src\agent\apis\resource\stock_resource_v1.hpp" />
-    <ClInclude Include="src\agent\apis\resource\version_resource_v1.hpp" />
-    <ClInclude Include="src\agent\apis\service\user_service.hpp" />
-    <ClInclude Include="src\agent\config\global_variable.hpp" />
     <ClInclude Include="src\agent\config\thirdparty\nh_namu\wmca_intf.hpp" />
     <ClInclude Include="src\core\config\interrupt\interrupt_handler.hpp" />
     <ClInclude Include="src\core\config\logger\logger_handler.hpp" />
@@ -69,12 +65,15 @@
     <ClInclude Include="src\core\config\thirdparty\cppdb\utils.hpp" />
     <ClInclude Include="src\core\controller\basic_controller.hpp" />
     <ClInclude Include="src\core\controller\controller.hpp" />
-    <ClInclude Include="src\core\controller\resource\resource.hpp" />
     <ClInclude Include="src\core\header\header.hpp" />
     <ClInclude Include="src\core\util\network_util.hpp" />
     <ClInclude Include="src\core\util\response_util.hpp" />
     <ClInclude Include="src\core\util\runtime_util.hpp" />
     <ClInclude Include="src\core\util\wstring_util.hpp" />
+    <ClInclude Include="src\initializer.hpp" />
+    <ClInclude Include="src\sample\user_service.hpp" />
+    <ClInclude Include="src\stock\stock_rest_controller.hpp" />
+    <ClInclude Include="src\version\version_rest_controller.hpp" />
     <ClInclude Include="src\win_app\win_app.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +94,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -157,7 +156,7 @@
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VcpkgRoot)\installed\x86-windows\lib</AdditionalLibraryDirectories>
     </Link>

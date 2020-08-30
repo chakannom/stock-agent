@@ -28,13 +28,6 @@
 #include "basic_controller.hpp"
 
 namespace cfx {
-    BasicController::BasicController() {
-
-    }
-
-    BasicController::~BasicController() {
-
-    }
     void BasicController::setEndpoint(const std::wstring & value) {
         uri endpointURI(value);
         uri_builder endpointBuilder;
@@ -45,6 +38,9 @@ namespace cfx {
         }
         else if (endpointURI.host() == L"host_auto_ip6") {
             endpointBuilder.set_host(NetworkUtil::hostIP6());
+        }
+        else {
+            endpointBuilder.set_host(endpointURI.host());
         }
         endpointBuilder.set_port(endpointURI.port());
         endpointBuilder.set_path(endpointURI.path());
