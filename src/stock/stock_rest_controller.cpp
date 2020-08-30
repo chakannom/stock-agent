@@ -15,7 +15,15 @@ void StockRestController::initRestOpHandlers() {
 }
 
 void StockRestController::handleGet(http_request request) {
-    request.reply(status_codes::NotImplemented, cks::ResponseUtil::responseNotImpl(methods::GET));
+    try {
+        auto response = json::value::object();
+        response[L"test"] = json::value::string(stockService.getTest());
+        request.reply(status_codes::OK, response);
+    }
+    catch (http_exception const& e) {
+        std::wcout << e.what() << std::endl;
+    }
+    //request.reply(status_codes::NotImplemented, cks::ResponseUtil::responseNotImpl(methods::GET));
 }
 
 void StockRestController::handlePatch(http_request request) {

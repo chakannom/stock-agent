@@ -2,7 +2,11 @@
 
 #include <core/controller/basic_controller.hpp>
 
+#include <stock/stock_service.hpp>
+
 class StockRestController : public cfx::BasicController, cfx::Controller {
+private:
+    StockService stockService;
 public:
     StockRestController(const std::wstring& url);
     ~StockRestController() {};

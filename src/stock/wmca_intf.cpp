@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <iostream>
-#include <windows.h>
+
 #include "wmca_intf.hpp"
 
 //////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@ WmcaIntf::WmcaIntf():
     m_pSetAccountIndexPwd(NULL), m_pSetOrderPwd(NULL), m_pSetHashPwd(NULL), m_pSetAccountNoPwd(NULL), m_pSetAccountNoByIndex(NULL)
 {
     if(!(m_hDll = LoadLibrary(L"wmca.dll"))) {
-        std::cout << "WMCA.DLL 파일이 없습니다.\n이 파일이 경로에 있는지 확인하시기 바랍니다." << std::endl;
+        std::wcout << L"WMCA.DLL 파일이 없습니다.\n이 파일이 경로에 있는지 확인하시기 바랍니다." << std::endl;
         return;
     }
 
@@ -48,7 +48,7 @@ WmcaIntf::WmcaIntf():
     if(!(m_pLoad && m_pFree && m_pSetServer && m_pSetPort && m_pIsConnected && m_pConnect && m_pDisconnect && m_pTransact && m_pQuery
         && m_pRequest && m_pAttach && m_pDetach && m_pDetachWindow && m_pDetachAll && m_pSetOption 
         && m_pSetAccountIndexPwd && m_pSetOrderPwd && m_pSetHashPwd && m_pSetAccountNoPwd) && m_pSetAccountNoByIndex) {
-        std::cout << "WMCA.DLL 파일을 인식할 수 없습니다.\n최신 버전의 정상적인 파일인지 확인하시기 바랍니다." << std::endl;
+        std::wcout << L"WMCA.DLL 파일을 인식할 수 없습니다.\n최신 버전의 정상적인 파일인지 확인하시기 바랍니다." << std::endl;
         return;
     }
 }

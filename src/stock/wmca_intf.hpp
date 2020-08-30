@@ -3,19 +3,21 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include <windows.h>
+
 #ifndef WMCAINTF_HPP
 #define WMCAINTF_HPP
 
 const DWORD CA_WMCAEVENT        = WM_USER + 8400;
 
-const DWORD CA_CONNECTED        = WM_USER + 110;
-const DWORD CA_DISCONNECTED     = WM_USER + 120;
-const DWORD CA_SOCKETERROR      = WM_USER + 130;
-const DWORD CA_RECEIVEDATA      = WM_USER + 210;
-const DWORD CA_RECEIVESISE      = WM_USER + 220;
-const DWORD CA_RECEIVEMESSAGE   = WM_USER + 230;
-const DWORD CA_RECEIVECOMPLETE  = WM_USER + 240;
-const DWORD CA_RECEIVEERROR     = WM_USER + 250;
+const DWORD CA_CONNECTED        = WM_USER + 110; //로그인 성공
+const DWORD CA_DISCONNECTED     = WM_USER + 120; //접속 끊김
+const DWORD CA_SOCKETERROR      = WM_USER + 130; //통신 오류 발생
+const DWORD CA_RECEIVEDATA      = WM_USER + 210; //서비스 응답 수신(TR)
+const DWORD CA_RECEIVESISE      = WM_USER + 220; //실시간 데이터 수신(BC)
+const DWORD CA_RECEIVEMESSAGE   = WM_USER + 230; //상태 메시지 수신 (입력값이 잘못되었을 경우 문자열형태로 설명이 수신됨)
+const DWORD CA_RECEIVECOMPLETE  = WM_USER + 240; //서비스 처리 완료
+const DWORD CA_RECEIVEERROR     = WM_USER + 250; //서비스 처리중 오류 발생 (입력값 오류등)
 
 typedef BOOL (__stdcall TLoad                   )();
 typedef BOOL (__stdcall TFree                   )();

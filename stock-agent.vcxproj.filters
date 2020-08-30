@@ -22,20 +22,8 @@
     <Filter Include="소스 파일\agent">
       <UniqueIdentifier>{fcb4c0a3-5864-47f7-86c3-bb0f9a0818eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\agent\apis">
-      <UniqueIdentifier>{5617074f-afb5-4836-9299-91119b654d37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\agent\config">
       <UniqueIdentifier>{ccb58ce9-a9ec-46ae-80c9-6ddc0a5777f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\agent\apis\resource">
-      <UniqueIdentifier>{966eec79-2732-464d-8ca0-f78e7521949d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\agent\config\thirdparty">
-      <UniqueIdentifier>{ec8495a2-55e2-41cc-9009-ddb9a90fd061}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\agent\config\thirdparty\nh_namu">
-      <UniqueIdentifier>{815d709e-8aae-4f0e-9993-f625b7f2e9f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\core\config">
       <UniqueIdentifier>{ffa9dd1e-527a-4f0c-b344-fce30ea689c7}</UniqueIdentifier>
@@ -70,20 +58,8 @@
     <Filter Include="헤더 파일\win_app">
       <UniqueIdentifier>{9702c7c2-97b4-415d-8f24-57c494ba05d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\agent\apis">
-      <UniqueIdentifier>{1f796351-4230-4473-9b14-2ed53c9dff14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\agent\apis\resource">
-      <UniqueIdentifier>{48f57ba4-8d75-4001-93ec-21675426d445}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\agent\config">
       <UniqueIdentifier>{12c590b1-8b14-44ad-9d03-939004cf5407}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\agent\config\thirdparty">
-      <UniqueIdentifier>{3441c4dd-65be-4a19-a8d2-2ab285ec6b69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\agent\config\thirdparty\nh_namu">
-      <UniqueIdentifier>{64a211ee-fe80-4367-8c4b-3aa74e05bbc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\core\config">
       <UniqueIdentifier>{28116183-9223-44fe-b8e5-bf4c8b668a80}</UniqueIdentifier>
@@ -129,12 +105,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\agent\apis\resource\stock_resource_v1.cpp">
-      <Filter>소스 파일\agent\apis\resource</Filter>
-    </ClCompile>
-    <ClCompile Include="src\agent\config\thirdparty\nh_namu\wmca_intf.cpp">
-      <Filter>소스 파일\agent\config\thirdparty\nh_namu</Filter>
-    </ClCompile>
     <ClCompile Include="src\agent\config\database_configuration.cpp">
       <Filter>소스 파일\agent\config</Filter>
     </ClCompile>
@@ -201,14 +171,17 @@
     <ClCompile Include="src\sample\user_service.cpp">
       <Filter>소스 파일\sample</Filter>
     </ClCompile>
+    <ClCompile Include="src\stock\stock_service.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\wmca_intf.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\wmca_intf_helper.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\agent\apis\resource\stock_resource_v1.hpp">
-      <Filter>헤더 파일\agent\apis\resource</Filter>
-    </ClInclude>
-    <ClInclude Include="src\agent\config\thirdparty\nh_namu\wmca_intf.hpp">
-      <Filter>헤더 파일\agent\config\thirdparty\nh_namu</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\util\wstring_util.hpp">
       <Filter>헤더 파일\core\util</Filter>
     </ClInclude>
@@ -292,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="src\initializer.hpp">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_service.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\wmca_intf.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\wmca_intf_helper.hpp">
+      <Filter>헤더 파일\stock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
