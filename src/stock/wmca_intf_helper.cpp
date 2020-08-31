@@ -8,23 +8,56 @@
 
 #include "wmca_intf_helper.hpp"
 
-std::wstring WmcaIntfHelper::getTest(WmcaIntf & wmcaIntf) {
+WNDPROC WmcaIntfHelper::sampleWndProc = nullptr;
+std::wstring WmcaIntfHelper::sampleData = L"";
 
-    static std::wstring test = L"";
+WmcaIntfHelper::WmcaIntfHelper(const wchar_t* pClassName, const wchar_t* pWindowName) {
+    this->pClassName = pClassName;
+    this->pWindowName = pWindowName;
+    this->hInstance = GetModuleHandleW(nullptr);
+}
 
-    HINSTANCE hInstance = GetModuleHandle(NULL);
+ATOM WmcaIntfHelper::RegisterWndClass(WNDPROC wndClass) {
+    WNDCLASSEXW wcex = {0};
 
-    // TODO: 여기에 코드를 입력합니다.
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
+    wcex.cbSize = sizeof(WNDCLASSEXW);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
-        std::wcout << L"lpfnWndProc : " << message << std::endl;
+    wcex.lpfnWndProc = wndClass;
+    wcex.hInstance = hInstance;
+    wcex.lpszClassName = pClassName;
+
+    return RegisterClassExW(&wcex);
+}
+
+HWND WmcaIntfHelper::InitInstance() {
+    HWND hWnd = CreateWindowW(pClassName, pWindowName, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    if (!hWnd) {
+        return nullptr;
+    }
+
+    ShowWindow(hWnd, SW_HIDE);
+    UpdateWindow(hWnd);
+
+    return hWnd;
+}
+
+int WmcaIntfHelper::messageLoop() {
+    MSG msg = {0};
+
+    while (GetMessageW(&msg, NULL, 0, 0)) {
+        DispatchMessageW(&msg);
+    }
+
+    return (int)msg.wParam;
+}
+
+void WmcaIntfHelper::generateWndProcFunctions() {
+    sampleWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
+        std::wcout << L"WndProcSample : " << message << std::endl;
         switch (message) {
             case WM_USER + 0x1000:
-                test += L"WM_USER + 0x1000";
+                sampleData += L"WM_USER + 0x1000";
                 return 0;
             case CA_WMCAEVENT:
                 {
@@ -36,7 +69,8 @@ std::wstring WmcaIntfHelper::getTest(WmcaIntf & wmcaIntf) {
                                 char szText[256] = { 0 };
                                 strncpy(szText, pLogin->pLoginInfo->szDate, sizeof pLogin->pLoginInfo->szDate);
                                 std::string strText(szText);
-                                test += L"접속시각 : " + std::wstring(strText.begin(), strText.end());
+                                sampleData += L"CONNECTED_TIME : " + std::wstring(strText.begin(), strText.end());
+                                sampleData += std::wstring(L"안녕");
                                 SendMessage(hWnd, WM_CLOSE, 0, 0);
                             }
                             break;
@@ -72,37 +106,4 @@ std::wstring WmcaIntfHelper::getTest(WmcaIntf & wmcaIntf) {
         }
         return DefWindowProc(hWnd, message, wParam, lParam);
     };
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = nullptr;
-    wcex.hCursor = nullptr;
-    wcex.hbrBackground = nullptr;
-    wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = L"TEST";
-    wcex.hIconSm = nullptr;
-    RegisterClassExW(&wcex);
-
-    // 애플리케이션 초기화를 수행합니다:
-    HWND hWnd = CreateWindowW(L"TEST", L"TEST", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-    if (!hWnd) {
-        return L"";
-    }
-
-    ShowWindow(hWnd, SW_HIDE);
-    UpdateWindow(hWnd);
-
-    wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', "", "", "");
-
-    MSG msg = {};
-
-    while (GetMessageW(&msg, NULL, 0, 0)) {
-        DispatchMessageW(&msg);
-    }
-
-    std::wstring message(test);
-    test.clear();
-    return message;
 }

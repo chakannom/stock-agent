@@ -6,8 +6,8 @@ class StockService {
 private:
 	WmcaIntf wmcaIntf;
 public:
-	StockService() {};
-	~StockService() {};
+	StockService();
+	~StockService() = default;
 	std::wstring getTest();
 };
 

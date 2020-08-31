@@ -4,8 +4,20 @@
 
 #include "stock_service.hpp"
 
+StockService::StockService() {
+	WmcaIntfHelper::generateWndProcFunctions();
+}
+
 std::wstring StockService::getTest() {
-	WmcaIntfHelper wmcaIntfHelper;
-	std::wstring str = wmcaIntfHelper.getTest(wmcaIntf);
+	WmcaIntfHelper::sampleData.clear();
+
+	WmcaIntfHelper wmcaIntfHelper(L"GetTest", L"GetTest");
+	wmcaIntfHelper.RegisterWndClass(WmcaIntfHelper::sampleWndProc);
+	HWND hWnd = wmcaIntfHelper.InitInstance();
+	wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', "", "", "");
+	wmcaIntfHelper.messageLoop();
+
+	std::wstring str(WmcaIntfHelper::sampleData);
+	WmcaIntfHelper::sampleData.clear();
 	return str;
 }
