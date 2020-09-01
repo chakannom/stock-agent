@@ -17,7 +17,7 @@ void StockRestController::initRestOpHandlers() {
 void StockRestController::handleGet(http_request request) {
     try {
         auto response = json::value::object();
-        response[L"test"] = json::value::string(stockService.getTest());
+        response[L"test"] = json::value::string(stockService.connect());
         request.reply(status_codes::OK, response);
     }
     catch (http_exception const& e) {

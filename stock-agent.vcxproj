@@ -42,8 +42,8 @@
     <ClCompile Include="src\stock\stock_service.cpp" />
     <ClCompile Include="src\stock\wmca_intf.cpp" />
     <ClCompile Include="src\stock\wmca_intf_helper.cpp" />
+    <ClCompile Include="src\stock\wmca_intf_msg_proc.cpp" />
     <ClCompile Include="src\version\version_rest_controller.cpp" />
-    <ClCompile Include="src\win_app\win_app.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\config\interrupt\interrupt_handler.hpp" />
@@ -75,8 +75,8 @@
     <ClInclude Include="src\stock\stock_service.hpp" />
     <ClInclude Include="src\stock\wmca_intf.hpp" />
     <ClInclude Include="src\stock\wmca_intf_helper.hpp" />
+    <ClInclude Include="src\stock\wmca_intf_msg_proc.hpp" />
     <ClInclude Include="src\version\version_rest_controller.hpp" />
-    <ClInclude Include="src\win_app\win_app.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

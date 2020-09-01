@@ -16,9 +16,6 @@
     <Filter Include="소스 파일\core">
       <UniqueIdentifier>{6eb991f1-9fb3-4aa6-b3b2-f1afaac1e4e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\win_app">
-      <UniqueIdentifier>{51f009ba-c192-497c-bb8f-c0da5c6a585f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\agent">
       <UniqueIdentifier>{fcb4c0a3-5864-47f7-86c3-bb0f9a0818eb}</UniqueIdentifier>
     </Filter>
@@ -54,9 +51,6 @@
     </Filter>
     <Filter Include="헤더 파일\core">
       <UniqueIdentifier>{3555169c-104c-4f33-a629-7ebe01ddf2b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\win_app">
-      <UniqueIdentifier>{9702c7c2-97b4-415d-8f24-57c494ba05d3}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\agent\config">
       <UniqueIdentifier>{12c590b1-8b14-44ad-9d03-939004cf5407}</UniqueIdentifier>
@@ -153,9 +147,6 @@
     <ClCompile Include="src\core\util\network_util.cpp">
       <Filter>소스 파일\core\util</Filter>
     </ClCompile>
-    <ClCompile Include="src\win_app\win_app.cpp">
-      <Filter>소스 파일\win_app</Filter>
-    </ClCompile>
     <ClCompile Include="src\application.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -178,6 +169,9 @@
       <Filter>소스 파일\stock</Filter>
     </ClCompile>
     <ClCompile Include="src\stock\wmca_intf_helper.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\wmca_intf_msg_proc.cpp">
       <Filter>소스 파일\stock</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,9 +242,6 @@
     <ClInclude Include="src\core\config\thirdparty\cppdb\utils.hpp">
       <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
     </ClInclude>
-    <ClInclude Include="src\win_app\win_app.hpp">
-      <Filter>헤더 파일\win_app</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\config\logger\logger_handler.hpp">
       <Filter>헤더 파일\core\config\logger</Filter>
     </ClInclude>
@@ -273,6 +264,9 @@
       <Filter>헤더 파일\stock</Filter>
     </ClInclude>
     <ClInclude Include="src\stock\wmca_intf_helper.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\wmca_intf_msg_proc.hpp">
       <Filter>헤더 파일\stock</Filter>
     </ClInclude>
   </ItemGroup>
