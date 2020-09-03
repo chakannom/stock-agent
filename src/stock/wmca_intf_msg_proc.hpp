@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stock/wmca_intf_msg_event.hpp>
+
 class WmcaIntfMsgProc {
 public:
     class ObjectMsg {
@@ -13,9 +15,11 @@ public:
 public:
     // Connect
     static ResultMsg connectMsg;
+    static WmcaIntfMsgEvent connectMsgEvent;
     static WNDPROC connectWndProc;
     // Sample
     static std::wstring sampleData;
+    static WmcaIntfMsgEvent sampleMsgEvent;
     static WNDPROC sampleWndProc;
 
 };

@@ -4,12 +4,14 @@
 
 class StockService {
 private:
-	WmcaIntf wmcaIntf;
+    WmcaIntf wmcaIntf;
 public:
-	StockService() = default;
-	~StockService() = default;
-	std::wstring connect();
+    StockService() = default;
+    ~StockService() = default;
+    std::wstring connect();
+    void disconnect();
+    void getBalance(); // 잔고조회
 
-	std::wstring getTest();
+    std::wstring getTest();
 };
 
