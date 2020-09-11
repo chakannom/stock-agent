@@ -17,7 +17,7 @@ void StockRestController::initRestOpHandlers() {
 void StockRestController::handleGet(http_request request) {
     try {
         auto response = json::value::object();
-        response[L"test"] = json::value::string(stockService.connect());
+        response[L"test"] = json::value::string(L"TEST");
         request.reply(status_codes::OK, response);
     }
     catch (http_exception const& e) {
@@ -34,8 +34,23 @@ void StockRestController::handlePut(http_request request) {
     request.reply(status_codes::NotImplemented, cks::ResponseUtil::responseNotImpl(methods::PUT));
 }
 
-void StockRestController::handlePost(http_request request) {
-    request.reply(status_codes::NotImplemented, cks::ResponseUtil::responseNotImpl(methods::POST));
+void StockRestController::handlePost(http_request request) {;
+    try {
+        auto path = requestPath(request);
+        if (path._Equal(L"/connect")) {
+            auto response = json::value::object();
+            response[L"test"] = json::value::string(stockService.connect(request.extract_json().get()));
+            request.reply(status_codes::OK, response);
+        }
+    }
+    catch (http_exception const& e) {
+        request.reply(status_codes::BadRequest, cks::ResponseUtil::responseBadRequest(methods::POST));
+    }
+    catch (...) {
+        request.reply(status_codes::BadRequest, cks::ResponseUtil::responseBadRequest(methods::POST));
+    }
+
+    request.reply(status_codes::NotFound, cks::ResponseUtil::responseNotFound(methods::POST));
 }
 
 void StockRestController::handleDelete(http_request request) {

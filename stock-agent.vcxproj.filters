@@ -97,6 +97,18 @@
     <Filter Include="헤더 파일\sample">
       <UniqueIdentifier>{abc7cd11-e81f-482f-a11b-4066406db7e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty\cpprest">
+      <UniqueIdentifier>{52be1b0a-5f33-4aea-867f-7c01a3e54cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cpprest">
+      <UniqueIdentifier>{4380768f-8049-49ee-ac1a-3281f1d05e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cpprest\details">
+      <UniqueIdentifier>{f28a86d2-25b2-449c-a079-146e6a9b5d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty\cpprest\details">
+      <UniqueIdentifier>{9d3a2602-d1c2-48c4-bcc9-63f825dd3b4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\agent\config\database_configuration.cpp">
@@ -177,11 +189,11 @@
     <ClCompile Include="src\stock\wmca_intf_msg_event.cpp">
       <Filter>소스 파일\stock</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cpprest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\util\wstring_util.hpp">
-      <Filter>헤더 파일\core\util</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\util\runtime_util.hpp">
       <Filter>헤더 파일\core\util</Filter>
     </ClInclude>
@@ -275,11 +287,34 @@
     <ClInclude Include="src\stock\wmca_intf_msg_event.hpp">
       <Filter>헤더 파일\stock</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\pragma_warnings.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\logging_utils.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\private_access.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\system_error.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\uri_schemes.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\util\string_util.hpp">
+      <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include=".gitignore" />
     <None Include="README.md" />
     <None Include="log4cxx.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\core\config\thirdparty\cpprest\ws_listener.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </Text>
   </ItemGroup>
 </Project>

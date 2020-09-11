@@ -33,6 +33,7 @@
     <ClCompile Include="src\core\config\thirdparty\cppdb\pool.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\shared_object.cpp" />
     <ClCompile Include="src\core\config\thirdparty\cppdb\utils.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp" />
     <ClCompile Include="src\core\controller\basic_controller.cpp" />
     <ClCompile Include="src\core\util\network_util.cpp" />
     <ClCompile Include="src\application.cpp" />
@@ -63,13 +64,18 @@
     <ClInclude Include="src\core\config\thirdparty\cppdb\ref_ptr.hpp" />
     <ClInclude Include="src\core\config\thirdparty\cppdb\shared_object.hpp" />
     <ClInclude Include="src\core\config\thirdparty\cppdb\utils.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\pragma_warnings.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\private_access.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\system_error.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\logging_utils.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\uri_schemes.h" />
     <ClInclude Include="src\core\controller\basic_controller.hpp" />
     <ClInclude Include="src\core\controller\controller.hpp" />
     <ClInclude Include="src\core\header\header.hpp" />
     <ClInclude Include="src\core\util\network_util.hpp" />
     <ClInclude Include="src\core\util\response_util.hpp" />
     <ClInclude Include="src\core\util\runtime_util.hpp" />
-    <ClInclude Include="src\core\util\wstring_util.hpp" />
+    <ClInclude Include="src\core\util\string_util.hpp" />
     <ClInclude Include="src\initializer.hpp" />
     <ClInclude Include="src\sample\user_service.hpp" />
     <ClInclude Include="src\stock\stock_rest_controller.hpp" />
@@ -85,6 +91,9 @@
     <None Include=".gitignore" />
     <None Include="log4cxx.conf" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\core\config\thirdparty\cpprest\ws_listener.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -5,7 +5,9 @@
 - boost (vcpkg)
 - sqlite3 (vcpkg)
 - log4cxx (vcpkg)
+- websocketpp (vcpkg)
 - cppdb v0.3.1 ( include: core/config/thirdparty/cppdb )
+- web::websockets::server ( include: core/config/thirdparty/cpprest )
 
 ## how to use log4cxx
 LoggerPtr log = Logger::getLogger("NAME");
