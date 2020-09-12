@@ -16,14 +16,26 @@ void StockRestController::initRestOpHandlers() {
 
 void StockRestController::handleGet(http_request request) {
     try {
-        auto response = json::value::object();
-        response[L"test"] = json::value::string(L"TEST");
-        request.reply(status_codes::OK, response);
+        auto path = requestPath(request);
+        if (path._Equal(L"/isconnected")) {
+            auto response = json::value::object();
+            response[L"isConnected"] = json::value::boolean(stockService.isConnected());
+            request.reply(status_codes::OK, response);
+        }
+        else if (path._Equal(L"/query")) {
+            auto response = json::value::object();
+            response[L"query"] = json::value::string(stockService.getTest());
+            request.reply(status_codes::OK, response);
+        }
     }
     catch (http_exception const& e) {
-        std::wcout << e.what() << std::endl;
+        request.reply(status_codes::BadRequest, cks::ResponseUtil::responseBadRequest(methods::GET));
     }
-    //request.reply(status_codes::NotImplemented, cks::ResponseUtil::responseNotImpl(methods::GET));
+    catch (...) {
+        request.reply(status_codes::BadRequest, cks::ResponseUtil::responseBadRequest(methods::GET));
+    }
+
+    request.reply(status_codes::NotFound, cks::ResponseUtil::responseNotFound(methods::GET));
 }
 
 void StockRestController::handlePatch(http_request request) {
@@ -39,7 +51,13 @@ void StockRestController::handlePost(http_request request) {;
         auto path = requestPath(request);
         if (path._Equal(L"/connect")) {
             auto response = json::value::object();
-            response[L"test"] = json::value::string(stockService.connect(request.extract_json().get()));
+            response[L"connect"] = json::value::string(stockService.connect(request.extract_json().get()));
+            request.reply(status_codes::OK, response);
+        }
+        else if (path._Equal(L"/disconnect")) {
+            auto response = json::value::object();
+            stockService.disconnect();
+            response[L"disconnect"] = json::value::string(L"disconnect");
             request.reply(status_codes::OK, response);
         }
     }

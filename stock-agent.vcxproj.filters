@@ -192,6 +192,9 @@
     <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp">
       <Filter>소스 파일\core\config\thirdparty\cpprest</Filter>
     </ClCompile>
+    <ClCompile Include="src\stock\stock_service_helper.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\util\runtime_util.hpp">
@@ -304,6 +307,15 @@
     </ClInclude>
     <ClInclude Include="src\core\util\string_util.hpp">
       <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\trio_ord.h">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\trio_inv.h">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_service_helper.hpp">
+      <Filter>헤더 파일\stock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

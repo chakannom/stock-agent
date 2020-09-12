@@ -9,10 +9,25 @@
 
 #include "wmca_intf_msg_proc.hpp"
 
+//
+
+// Connect
 WmcaIntfMsgProc::ResultMsg WmcaIntfMsgProc::connectMsg;
 WmcaIntfMsgEvent WmcaIntfMsgProc::connectMsgEvent(&WmcaIntfMsgProc::connectMsg.msg);
 WNDPROC WmcaIntfMsgProc::connectWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
     switch (message) {
+        case WM_USER + 1000:
+        {
+            int cd = (int) lParam;
+            //connectMsg.msg.append(std::wstring(test.begin(), test.end()));
+            return 0;
+        }
+        case WM_COPYDATA:
+        {
+            int cd = (int)lParam;
+            //connectMsg.msg.append(std::wstring(test.begin(), test.end()));
+            return 0;
+        }
         case CA_WMCAEVENT:
         {
             switch (wParam) {
@@ -20,13 +35,20 @@ WNDPROC WmcaIntfMsgProc::connectWndProc = [](HWND hWnd, UINT message, WPARAM wPa
                 {
                     std::wcout << L"CA_CONNECTED" << std::endl;
                     connectMsgEvent.OnWmConnected((LOGINBLOCK*)lParam);
-                    SendMessage(hWnd, WM_CLOSE, 0, 0);
+                    //SendMessage(hWnd, WM_CLOSE, 0, 0);
                     break;
                 }
                 case CA_DISCONNECTED:        //접속 끊김
                 {
                     std::wcout << L"CA_DISCONNECTED" << std::endl;
                     connectMsgEvent.OnWmDisconnected();
+                    SendMessage(hWnd, WM_CLOSE, 0, 0);
+                    break;
+                }
+                case CA_SOCKETERROR:        //통신 오류 발생
+                {
+                    std::wcout << L"CA_SOCKETERROR" << std::endl;
+                    connectMsgEvent.OnWmSocketError((int)lParam);
                     SendMessage(hWnd, WM_CLOSE, 0, 0);
                     break;
                 }
@@ -53,6 +75,45 @@ WNDPROC WmcaIntfMsgProc::connectWndProc = [](HWND hWnd, UINT message, WPARAM wPa
     return DefWindowProc(hWnd, message, wParam, lParam);
 };
 
+// Disonnect
+WmcaIntfMsgProc::ResultMsg WmcaIntfMsgProc::disconnectMsg;
+WmcaIntfMsgEvent WmcaIntfMsgProc::disconnectMsgEvent(&WmcaIntfMsgProc::disconnectMsg.msg);
+WNDPROC WmcaIntfMsgProc::disconnectWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
+    switch (message) {
+        case CA_WMCAEVENT:
+        {
+            switch (wParam) {
+                case CA_DISCONNECTED:        //접속 끊김
+                {
+                    std::wcout << L"CA_DISCONNECTED" << std::endl;
+                    disconnectMsgEvent.OnWmDisconnected();
+                    SendMessage(hWnd, WM_CLOSE, 0, 0);
+                    break;
+                }
+                case CA_RECEIVEMESSAGE:     //상태 메시지 수신
+                {
+                    std::wcout << L"CA_RECEIVEMESSAGE" << std::endl;
+                    disconnectMsgEvent.OnWmReceiveMessage((OUTDATABLOCK*)lParam);
+                    break;
+                }
+                default:
+                {
+                    SendMessage(hWnd, WM_CLOSE, 0, 0);
+                    break;
+                }
+            }
+            return 0;
+        }
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+    }
+    return DefWindowProc(hWnd, message, wParam, lParam);
+};
+
+// Sample
 std::wstring WmcaIntfMsgProc::sampleData;
 WmcaIntfMsgEvent WmcaIntfMsgProc::sampleMsgEvent(&WmcaIntfMsgProc::sampleData);
 WNDPROC WmcaIntfMsgProc::sampleWndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
@@ -102,6 +163,7 @@ WNDPROC WmcaIntfMsgProc::sampleWndProc = [](HWND hWnd, UINT message, WPARAM wPar
                 {
                     std::wcout << L"CA_RECEIVECOMPLETE" << std::endl;
                     sampleMsgEvent.OnWmReceiveComplete((OUTDATABLOCK*)lParam);
+                    SendMessage(hWnd, WM_CLOSE, 0, 0);
                     break;
                 }
                 case CA_RECEIVEERROR:       //서비스 처리중 오류 발생 (입력값 오류등)

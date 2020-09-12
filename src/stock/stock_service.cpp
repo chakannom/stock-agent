@@ -4,32 +4,61 @@
 
 #include <core/util/string_util.hpp>
 
-#include <stock/wmca_intf_helper.hpp>
-#include <stock/wmca_intf_msg_proc.hpp>
-
 #include "stock_service.hpp"
+#include "stock_service_helper.hpp"
 
-std::wstring StockService::connect(const web::json::value & json) {
+StockService::StockService() : si({ 0, }), pi({ 0, }) {
+    //LPWSTR command = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\namu\\Debug\\WMCALOADER.test";
+    //si.cb = sizeof(si);
+    //CreateProcess(command, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+}
+
+StockService::~StockService() {
+}
+
+std::wstring StockService::connect(const web::json::value& json) {
+    std::lock_guard<std::mutex> lock_guard(stockMutex);
+    StockServiceHelper stockServiceHelper;
+
+    HWND hWnd = FindWindow(0, L"STOCK_COMMAND");
+    SendMessage(hWnd, WM_COMMAND, 1003, 0);
+
+    stockServiceHelper.messageLoop();
+
+    return stockServiceHelper.getData();
+    /*
     WmcaIntfMsgProc::connectMsg.msg.clear();
 
     WmcaIntfHelper wmcaIntfHelper(L"connect", L"connect");
     wmcaIntfHelper.registerWndClass(WmcaIntfMsgProc::connectWndProc);
-    HWND hWnd = wmcaIntfHelper.initInstance();
+    wmcaIntfHelper.initInstance();
 
     const char* szID = cks::StringUtil::wctoc(json.at(L"id").as_string().c_str());
     const char* szPW = cks::StringUtil::wctoc(json.at(L"pw").as_string().c_str());
     const char* szCertPW = cks::StringUtil::wctoc(json.at(L"certPw").as_string().c_str());
-    wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', szID, szPW, szCertPW);
+    HWND hWnd = FindWindow(0, L"OpenAPI_Test");
+    //wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', szID, szPW, szCertPW);
+
+    SendMessage(hWnd, WM_COMMAND, 1003, 0);
 
     wmcaIntfHelper.messageLoop();
+
 
     std::wstring msg(WmcaIntfMsgProc::connectMsg.msg);
     WmcaIntfMsgProc::connectMsg.msg.clear();
     return msg;
+    */
 }
 
 void StockService::disconnect() {
+    std::lock_guard<std::mutex> lock_guard(stockMutex);
+    //if (isConnected()) {
+        wmcaIntf.Disconnect();
+    //}
+}
 
+bool StockService::isConnected() {
+    return wmcaIntf.IsConnected();
 }
 
 void StockService::getBalance() {
@@ -37,15 +66,22 @@ void StockService::getBalance() {
 }
 
 std::wstring StockService::getTest() {
+    std::lock_guard<std::mutex> lock_guard(stockMutex);
+    /*
     WmcaIntfMsgProc::sampleData.clear();
 
     WmcaIntfHelper wmcaIntfHelper(L"GetTest", L"GetTest");
     wmcaIntfHelper.registerWndClass(WmcaIntfMsgProc::sampleWndProc);
-    HWND hWnd = wmcaIntfHelper.initInstance();
-    wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', "", "", "");
+    wmcaIntfHelper.initInstance();
+
+    HWND hWnd = FindWindow(0, L"OpenAPI_Test");
+    SendMessage(hWnd, WM_COMMAND, 1003, 0);
+
     wmcaIntfHelper.messageLoop();
 
     std::wstring str(WmcaIntfMsgProc::sampleData);
     WmcaIntfMsgProc::sampleData.clear();
     return str;
+    */
+    return std::wstring(L"getTest");
 }

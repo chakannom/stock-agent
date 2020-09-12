@@ -8,7 +8,7 @@ private:
 public:
     WmcaIntfHelper(const wchar_t* pClassName, const wchar_t* pWindowName);
     ~WmcaIntfHelper() = default;
-    ATOM registerWndClass(WNDPROC wndClass);
+    ATOM registerWndClass(WNDPROC wndProc);
     HWND initInstance();
     int messageLoop();
 };

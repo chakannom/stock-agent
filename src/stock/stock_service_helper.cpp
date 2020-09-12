@@ -5,16 +5,31 @@
 #define WIN32_LEAN_AND_MEAN // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 #include <windows.h>
 
-#include "wmca_intf_helper.hpp"
+#include "stock_service_helper.hpp"
 
-WmcaIntfHelper::WmcaIntfHelper(const wchar_t* pClassName, const wchar_t* pWindowName) {
-    this->pClassName = pClassName;
-    this->pWindowName = pWindowName;
+std::wstring StockServiceHelper::data;
+WNDPROC StockServiceHelper::wndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
+    switch (message) {
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+    }
+    return DefWindowProc(hWnd, message, wParam, lParam);
+};
+
+StockServiceHelper::StockServiceHelper() {
+    this->data.clear();
+    this->pClassName = L"STOCK_AGENT-STOCK_SERVICE_HELPER";
+    this->pWindowName = L"STOCK_AGENT-STOCK_SERVICE_HELPER";
     this->hInstance = GetModuleHandleW(nullptr);
+    registerWndClass();
+    initInstance();
 }
 
-ATOM WmcaIntfHelper::registerWndClass(WNDPROC wndProc) {
-    WNDCLASSEXW wcex = { 0 };
+ATOM StockServiceHelper::registerWndClass() {
+    WNDCLASSEXW wcex = { 0, };
 
     wcex.cbSize = sizeof(WNDCLASSEXW);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -25,7 +40,7 @@ ATOM WmcaIntfHelper::registerWndClass(WNDPROC wndProc) {
     return RegisterClassExW(&wcex);
 }
 
-HWND WmcaIntfHelper::initInstance() {
+HWND StockServiceHelper::initInstance() {
     HWND hWnd = CreateWindowW(pClassName, pWindowName, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
     if (!hWnd) {
@@ -38,7 +53,7 @@ HWND WmcaIntfHelper::initInstance() {
     return hWnd;
 }
 
-int WmcaIntfHelper::messageLoop() {
+int StockServiceHelper::messageLoop() {
     MSG msg = { 0 };
 
     while (GetMessageW(&msg, NULL, 0, 0)) {
@@ -46,4 +61,8 @@ int WmcaIntfHelper::messageLoop() {
     }
 
     return (int)msg.wParam;
+}
+
+std::wstring StockServiceHelper::getData() {
+    return data;
 }

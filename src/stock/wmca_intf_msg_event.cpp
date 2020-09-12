@@ -4,6 +4,8 @@
 
 
 #include "wmca_intf_msg_event.hpp"
+#include "trio_inv.h"
+#include "trio_ord.h"
 
 WmcaIntfMsgEvent::WmcaIntfMsgEvent(std::wstring* pMsg) {
     this->pMsg = pMsg;
@@ -80,7 +82,39 @@ void WmcaIntfMsgEvent::OnWmSocketError(int socketErrorCode) {
 }
 
 void WmcaIntfMsgEvent::OnWmReceiveData(OUTDATABLOCK* pOutData) {
+    switch (pOutData->TrIndex)
+    {
+    case TRID_c1101:
+        //////////////////////////////////////////////////////////////////////////
+        //반복되지 않는 단순출력 처리 방식
+        //////////////////////////////////////////////////////////////////////////
 
+        if (strcmp(pOutData->pData->szBlockName, "c1101OutBlock") == 0)
+        {
+            Tc1101OutBlock* pc1101outblock = (Tc1101OutBlock*)pOutData->pData->szData;
+
+            pMsg->append(L">>  주식현재가조회 - 현재가");
+
+            std::string hottime(pc1101outblock->hotime);
+            pMsg->append(std::wstring(hottime.begin(), hottime.end()));
+
+            std::string code(pc1101outblock->code);
+            pMsg->append(std::wstring(code.begin(), code.end()));
+            std::string hname(pc1101outblock->hname);
+            pMsg->append(std::wstring(hname.begin(), hname.end()));
+            std::string price(pc1101outblock->price);
+            pMsg->append(std::wstring(price.begin(), price.end()));
+            std::string volume(pc1101outblock->volume);
+            pMsg->append(std::wstring(volume.begin(), volume.end()));
+
+        }
+        //////////////////////////////////////////////////////////////////////////
+        //반복가능한 출력에 대한 처리 방식
+        //////////////////////////////////////////////////////////////////////////
+
+        //주식 현재가/변동거래량자료	
+        break;
+    }
 }
 
 void WmcaIntfMsgEvent::OnWmReceiveSise(OUTDATABLOCK* pSiseData) {
