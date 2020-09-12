@@ -21,8 +21,8 @@ WNDPROC StockServiceHelper::wndProc = [](HWND hWnd, UINT message, WPARAM wParam,
 
 StockServiceHelper::StockServiceHelper() {
     this->data.clear();
-    this->pClassName = L"STOCK_AGENT-STOCK_SERVICE_HELPER";
-    this->pWindowName = L"STOCK_AGENT-STOCK_SERVICE_HELPER";
+    this->pClassName = L"STOCK-AGENT_STOCK-SERVICE-HELPER";
+    this->pWindowName = L"STOCK-AGENT_STOCK-SERVICE-HELPER";
     this->hInstance = GetModuleHandleW(nullptr);
     registerWndClass();
     initInstance();

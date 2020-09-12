@@ -20,7 +20,7 @@ std::wstring StockService::connect(const web::json::value& json) {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
     StockServiceHelper stockServiceHelper;
 
-    HWND hWnd = FindWindow(0, L"STOCK_COMMAND");
+    HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
     SendMessage(hWnd, WM_COMMAND, 1003, 0);
 
     stockServiceHelper.messageLoop();
