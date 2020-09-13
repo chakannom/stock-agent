@@ -16,12 +16,27 @@ StockService::StockService() : si({ 0, }), pi({ 0, }) {
 StockService::~StockService() {
 }
 
-std::wstring StockService::connect(const web::json::value& json) {
+std::wstring StockService::connect(const web::json::value& cRequestJson) {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
     StockServiceHelper stockServiceHelper;
 
     HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
-    SendMessage(hWnd, WM_COMMAND, 1003, 0);
+
+    //web::json::value cRequestJsonTmp = web::json::value::object();
+    //cRequestJsonTmp[L"id"] = web::json::value::string(L"stock_아이디");
+    //cRequestJsonTmp[L"pw"] = web::json::value::string(L"stock_pw");
+    //cRequestJsonTmp[L"certPw"] = web::json::value::string(L"stock_certpw");
+    //std::wstring jsonString = cRequestJsonTmp.serialize();
+
+    std::wstring jsonString = cRequestJson.serialize();
+
+    COPYDATASTRUCT cds;
+    cds.dwData = WM_USER + 1001;
+    cds.cbData = jsonString.size() * sizeof(wchar_t);
+    cds.lpData = (PVOID)jsonString.c_str();
+
+    SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
+    SendMessage(hWnd, WM_COMMAND, 1000, 0);
 
     stockServiceHelper.messageLoop();
 

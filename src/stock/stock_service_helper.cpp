@@ -10,14 +10,32 @@
 std::wstring StockServiceHelper::data;
 WNDPROC StockServiceHelper::wndProc = [](HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT {
     switch (message) {
-        case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-            return 0;
-        }
+    case WM_COPYDATA:
+    {
+        OnCopyData((COPYDATASTRUCT*)lParam);
+        SendMessage(hWnd, WM_CLOSE, 0, 0);
+        return 0;
+    }
+    case WM_DESTROY:
+    {
+        PostQuitMessage(0);
+        return 0;
+    }
     }
     return DefWindowProc(hWnd, message, wParam, lParam);
 };
+
+BOOL StockServiceHelper::OnCopyData(COPYDATASTRUCT* pCopyDataStruct) {
+    switch (pCopyDataStruct->dwData)
+    {
+    case WM_STOCK_AGENT_SETSTRINGVARIABLE:
+        data = (LPCTSTR)pCopyDataStruct->lpData;
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
 
 StockServiceHelper::StockServiceHelper() {
     this->data.clear();
