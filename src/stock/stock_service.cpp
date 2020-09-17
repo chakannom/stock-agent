@@ -68,12 +68,13 @@ std::wstring StockService::connect(const web::json::value& cRequestJson) {
 void StockService::disconnect() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
     //if (isConnected()) {
-        wmcaIntf.Disconnect();
+        //wmcaIntf.Disconnect();
     //}
 }
 
 bool StockService::isConnected() {
-    return wmcaIntf.IsConnected();
+    //return wmcaIntf.IsConnected();
+    return false;
 }
 
 void StockService::getBalance() {

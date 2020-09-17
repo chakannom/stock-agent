@@ -1,12 +1,10 @@
 #pragma once
 
+#include <windows.h>
 #include <cpprest/json.h>
-
-#include <stock/wmca_intf.hpp>
 
 class StockService {
 private:
-    WmcaIntf wmcaIntf;
     std::mutex stockMutex;
     STARTUPINFO si;
     PROCESS_INFORMATION pi;

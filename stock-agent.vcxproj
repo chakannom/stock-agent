@@ -42,10 +42,6 @@
     <ClCompile Include="src\stock\stock_rest_controller.cpp" />
     <ClCompile Include="src\stock\stock_service.cpp" />
     <ClCompile Include="src\stock\stock_service_helper.cpp" />
-    <ClCompile Include="src\stock\wmca_intf.cpp" />
-    <ClCompile Include="src\stock\wmca_intf_helper.cpp" />
-    <ClCompile Include="src\stock\wmca_intf_msg_event.cpp" />
-    <ClCompile Include="src\stock\wmca_intf_msg_proc.cpp" />
     <ClCompile Include="src\version\version_rest_controller.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -82,12 +78,6 @@
     <ClInclude Include="src\stock\stock_rest_controller.hpp" />
     <ClInclude Include="src\stock\stock_service.hpp" />
     <ClInclude Include="src\stock\stock_service_helper.hpp" />
-    <ClInclude Include="src\stock\trio_inv.h" />
-    <ClInclude Include="src\stock\trio_ord.h" />
-    <ClInclude Include="src\stock\wmca_intf.hpp" />
-    <ClInclude Include="src\stock\wmca_intf_helper.hpp" />
-    <ClInclude Include="src\stock\wmca_intf_msg_event.hpp" />
-    <ClInclude Include="src\stock\wmca_intf_msg_proc.hpp" />
     <ClInclude Include="src\version\version_rest_controller.hpp" />
   </ItemGroup>
   <ItemGroup>

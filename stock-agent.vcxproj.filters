@@ -177,18 +177,6 @@
     <ClCompile Include="src\stock\stock_service.cpp">
       <Filter>소스 파일\stock</Filter>
     </ClCompile>
-    <ClCompile Include="src\stock\wmca_intf.cpp">
-      <Filter>소스 파일\stock</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stock\wmca_intf_helper.cpp">
-      <Filter>소스 파일\stock</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stock\wmca_intf_msg_proc.cpp">
-      <Filter>소스 파일\stock</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stock\wmca_intf_msg_event.cpp">
-      <Filter>소스 파일\stock</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp">
       <Filter>소스 파일\core\config\thirdparty\cpprest</Filter>
     </ClCompile>
@@ -278,18 +266,6 @@
     <ClInclude Include="src\stock\stock_service.hpp">
       <Filter>헤더 파일\stock</Filter>
     </ClInclude>
-    <ClInclude Include="src\stock\wmca_intf.hpp">
-      <Filter>헤더 파일\stock</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stock\wmca_intf_helper.hpp">
-      <Filter>헤더 파일\stock</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stock\wmca_intf_msg_proc.hpp">
-      <Filter>헤더 파일\stock</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stock\wmca_intf_msg_event.hpp">
-      <Filter>헤더 파일\stock</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\config\thirdparty\cpprest\details\pragma_warnings.h">
       <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
     </ClInclude>
@@ -307,12 +283,6 @@
     </ClInclude>
     <ClInclude Include="src\core\util\string_util.hpp">
       <Filter>헤더 파일\core\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stock\trio_ord.h">
-      <Filter>헤더 파일\stock</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stock\trio_inv.h">
-      <Filter>헤더 파일\stock</Filter>
     </ClInclude>
     <ClInclude Include="src\stock\stock_service_helper.hpp">
       <Filter>헤더 파일\stock</Filter>
