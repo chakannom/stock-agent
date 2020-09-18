@@ -56,8 +56,7 @@ void StockRestController::handlePost(http_request request) {;
         }
         else if (path._Equal(L"/disconnect")) {
             auto response = json::value::object();
-            stockService.disconnect();
-            response[L"disconnect"] = json::value::string(L"disconnect");
+            response[L"disconnect"] = json::value::string(stockService.disconnect());
             request.reply(status_codes::OK, response);
         }
     }

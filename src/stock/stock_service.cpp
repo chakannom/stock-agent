@@ -23,11 +23,11 @@ std::wstring StockService::connect(const web::json::value& cRequestJson) {
 
     HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
 
-    //web::json::value cRequestJsonTmp = web::json::value::object();
-    //cRequestJsonTmp[L"id"] = web::json::value::string(L"stock_아이디");
-    //cRequestJsonTmp[L"pw"] = web::json::value::string(L"stock_pw");
-    //cRequestJsonTmp[L"certPw"] = web::json::value::string(L"stock_certpw");
-    //std::wstring jsonString = cRequestJsonTmp.serialize();
+    //{
+    //    "id" : "username",
+    //    "pw" : "password",
+    //    "certPw" : "certificate password"
+    //}
 
     std::wstring jsonString = cRequestJson.serialize();
 
@@ -42,32 +42,19 @@ std::wstring StockService::connect(const web::json::value& cRequestJson) {
     stockServiceHelper.messageLoop();
 
     return stockServiceHelper.getData();
-    /*
-    WmcaIntfMsgProc::connectMsg.msg.clear();
-
-    WmcaIntfHelper wmcaIntfHelper(L"connect", L"connect");
-    wmcaIntfHelper.registerWndClass(WmcaIntfMsgProc::connectWndProc);
-    wmcaIntfHelper.initInstance();
-
-    const char* szID = cks::StringUtil::wctoc(json.at(L"id").as_string().c_str());
-    const char* szPW = cks::StringUtil::wctoc(json.at(L"pw").as_string().c_str());
-    const char* szCertPW = cks::StringUtil::wctoc(json.at(L"certPw").as_string().c_str());
-    HWND hWnd = FindWindow(0, L"OpenAPI_Test");
-    //wmcaIntf.Connect(hWnd, CA_WMCAEVENT, 'T', 'W', szID, szPW, szCertPW);
-
-    SendMessage(hWnd, WM_COMMAND, 1003, 0);
-
-    wmcaIntfHelper.messageLoop();
-
-
-    std::wstring msg(WmcaIntfMsgProc::connectMsg.msg);
-    WmcaIntfMsgProc::connectMsg.msg.clear();
-    return msg;
-    */
 }
 
-void StockService::disconnect() {
+std::wstring StockService::disconnect() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
+    StockServiceHelper stockServiceHelper;
+
+    HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
+
+    SendMessage(hWnd, WM_COMMAND, 1001, 0);
+
+    stockServiceHelper.messageLoop();
+
+    return stockServiceHelper.getData();
     //if (isConnected()) {
         //wmcaIntf.Disconnect();
     //}
