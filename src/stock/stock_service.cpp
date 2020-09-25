@@ -9,9 +9,9 @@
 #include "stock_service_helper.hpp"
 
 StockService::StockService() : si({ 0, }), pi({ 0, }) {
-    //LPWSTR command = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\namu\\Debug\\WMCALOADER.test";
-    //si.cb = sizeof(si);
-    //CreateProcess(command, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+    LPWSTR command = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor.exe";
+    si.cb = sizeof(si);
+    CreateProcess(command, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
 }
 
 StockService::~StockService() {
