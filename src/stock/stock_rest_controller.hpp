@@ -9,7 +9,7 @@ private:
     StockService stockService;
 public:
     StockRestController(const std::wstring& url);
-    ~StockRestController() {};
+    ~StockRestController() = default;
 private:
     void initRestOpHandlers() override;
     void handleGet(http_request request) override;

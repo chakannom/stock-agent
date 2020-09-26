@@ -10,6 +10,15 @@
 using namespace cfx;
 using namespace cks;
 
+BOOL WINAPI ConsoleHandler(DWORD CEvent) {
+    switch (CEvent) {
+    case CTRL_CLOSE_EVENT:
+        Initializer::destroyInstance();
+        break;
+    }
+    return TRUE;
+}
+
 int main(int argc, wchar_t* argv[]) {
     /*
     InterruptHandler::hookSIGINT();
@@ -30,6 +39,10 @@ int main(int argc, wchar_t* argv[]) {
         RuntimeUtil::printStackTrace();
     }
     */
+    if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleHandler, TRUE) == FALSE) {
+        std::wcout << L"Unable to install handler!" << std::endl;
+        return -1;
+    }
 
     InterruptHandler::hookSIGINT();
 
@@ -39,6 +52,8 @@ int main(int argc, wchar_t* argv[]) {
         InterruptHandler::waitForUserInterrupt();
 
         Initializer::getInstance()->waitShutdown();
+
+        Initializer::destroyInstance();
     } catch (std::exception& e) {
         std::wcerr << L"somehitng wrong happen! :(" << std::endl;
     } catch (...) {

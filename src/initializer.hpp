@@ -25,6 +25,9 @@ public:
         // volatile int dummy{};
         return sin;
     };
+    static void destroyInstance() {
+        delete getInstance();
+    };
     void waitAccept();
     void waitShutdown();
 private:

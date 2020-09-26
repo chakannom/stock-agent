@@ -9,12 +9,15 @@
 #include "stock_service_helper.hpp"
 
 StockService::StockService() : si({ 0, }), pi({ 0, }) {
-    LPWSTR command = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor.exe";
+    LPWSTR applicationName = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor.exe";
+    LPWSTR commandLine = (LPWSTR)L"stock-executor.exe --execute uuid";
     si.cb = sizeof(si);
-    CreateProcess(command, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+    CreateProcess(applicationName, commandLine, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
 }
 
 StockService::~StockService() {
+    TerminateProcess(pi.hProcess, 0);
+    WaitForSingleObject(pi.hProcess, 5000);
 }
 
 std::wstring StockService::connect(const web::json::value& cRequestJson) {
