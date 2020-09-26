@@ -5,7 +5,7 @@
             "executable": "C:\\Windows\\System32\\cmd.exe",
             "args": [
                 "/d", "/c",
-                "C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat",
+                "C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars32.bat",
                 "&&"
             ]
         }
@@ -30,11 +30,11 @@
                 "${workspaceFolder}\\src\\initializer.cpp",
                 "${workspaceFolder}\\src\\application.cpp",
                 "/I",
-                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x64-windows\\include",
+                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\include",
                 "/I",
                 "${workspaceFolder}\\src",
                 "/link",
-                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x64-windows\\lib\\*.lib"
+                "C:\\Users\\chakannom\\Development\\tools\\vcpkg\\installed\\x86-windows\\lib\\*.lib"
             ],
             "options": {
                 "cwd": "${workspaceFolder}\\build"
