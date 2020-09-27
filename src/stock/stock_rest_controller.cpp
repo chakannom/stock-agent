@@ -1,3 +1,5 @@
+#include <iostream>
+#include <regex>
 #include <core/util/response_util.hpp>
 
 #include "stock_rest_controller.hpp"
@@ -17,12 +19,19 @@ void StockRestController::initRestOpHandlers() {
 void StockRestController::handleGet(http_request request) {
     try {
         auto path = requestPath(request);
-        if (path._Equal(L"/isconnected")) {
+        std::wsmatch matches;
+        if (std::regex_match(path, matches, std::wregex(L"/connect/status"))) {
             auto response = json::value::object();
-            response[L"isConnected"] = json::value::boolean(stockService.isConnected());
+            response[L"status"] = json::value::boolean(stockService.isConnected());
             request.reply(status_codes::OK, response);
         }
-        else if (path._Equal(L"/query")) {
+        else if (std::regex_match(path, matches, std::wregex(L"/current/items/(\\d{6})"))) {
+            std::wstring code = matches[1];
+            auto response = json::value::object();
+            response[L"query"] = json::value::string(stockService.getCurrentPriceOfItem(code));
+            request.reply(status_codes::OK, response);
+        }
+        else if (std::regex_match(path, matches, std::wregex(L"/test"))) {
             auto response = json::value::object();
             response[L"query"] = json::value::string(stockService.getTest());
             request.reply(status_codes::OK, response);
@@ -49,12 +58,13 @@ void StockRestController::handlePut(http_request request) {
 void StockRestController::handlePost(http_request request) {;
     try {
         auto path = requestPath(request);
-        if (path._Equal(L"/connect")) {
+        std::wsmatch matches;
+        if (std::regex_match(path, matches, std::wregex(L"/connect"))) {
             auto response = json::value::object();
             response[L"connect"] = json::value::string(stockService.connect(request.extract_json().get()));
             request.reply(status_codes::OK, response);
         }
-        else if (path._Equal(L"/disconnect")) {
+        else if (std::regex_match(path, matches, std::wregex(L"/disconnect"))) {
             auto response = json::value::object();
             response[L"disconnect"] = json::value::string(stockService.disconnect());
             request.reply(status_codes::OK, response);

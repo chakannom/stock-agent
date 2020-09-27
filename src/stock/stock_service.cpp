@@ -4,74 +4,120 @@
 #include <windows.h>
 
 #include <core/util/string_util.hpp>
+#include <stock/stock_service_helper.hpp>
 
 #include "stock_service.hpp"
-#include "stock_service_helper.hpp"
 
-StockService::StockService() : si({ 0, }), pi({ 0, }) {
-    LPWSTR applicationName = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor.exe";
-    LPWSTR commandLine = (LPWSTR)L"stock-executor.exe --execute uuid";
-    si.cb = sizeof(si);
-    CreateProcess(applicationName, commandLine, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+//------------------------------------------------------------------
+/** 
+ * RequestJson Format:
+ * {
+ *      "id" : "username",
+ *      "pw" : "password",
+ *      "certPw" : "certificate password"
+ * }
+ */
+std::wstring StockService::connect(const web::json::value& reqJson) {
+    if (!isConnected()) {
+        std::lock_guard<std::mutex> lock_guard(stockMutex);
+        StockServiceHelper stockServiceHelper;
+
+        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+
+        std::wstring jsonString = reqJson.serialize();
+
+        COPYDATASTRUCT cds;
+        cds.dwData = WM_STOCK_EXECUTOR_SETSTRINGVARIABLE;
+        cds.cbData = jsonString.size() * sizeof(wchar_t);
+        cds.lpData = (PVOID)jsonString.c_str();
+
+        SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
+        SendMessage(hWnd, WM_COMMAND, IDC_BTN_CONNECT, 0);
+
+        stockServiceHelper.messageLoop();
+
+        return stockServiceHelper.getData();
+    }
+    else {
+        // 연결 중 호출한 경우 같은 데이터 전달
+    }
 }
 
-StockService::~StockService() {
-    TerminateProcess(pi.hProcess, 0);
-    WaitForSingleObject(pi.hProcess, 5000);
-}
-
-std::wstring StockService::connect(const web::json::value& cRequestJson) {
-    std::lock_guard<std::mutex> lock_guard(stockMutex);
-    StockServiceHelper stockServiceHelper;
-
-    HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
-
-    //{
-    //    "id" : "username",
-    //    "pw" : "password",
-    //    "certPw" : "certificate password"
-    //}
-
-    std::wstring jsonString = cRequestJson.serialize();
-
-    COPYDATASTRUCT cds;
-    cds.dwData = WM_USER + 1001;
-    cds.cbData = jsonString.size() * sizeof(wchar_t);
-    cds.lpData = (PVOID)jsonString.c_str();
-
-    SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
-    SendMessage(hWnd, WM_COMMAND, 1000, 0);
-
-    stockServiceHelper.messageLoop();
-
-    return stockServiceHelper.getData();
-}
-
+//------------------------------------------------------------------
 std::wstring StockService::disconnect() {
+    if (isConnected()) {
+        std::lock_guard<std::mutex> lock_guard(stockMutex);
+        StockServiceHelper stockServiceHelper;
+
+        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+
+        SendMessage(hWnd, WM_COMMAND, IDC_BTN_DISCONNECT, 0);
+
+        stockServiceHelper.messageLoop();
+
+        return stockServiceHelper.getData();
+    }
+    else {
+        // 연결 중이 아닌데 호출한 경우 연결 해제된 상태임을 알려주는 데이터 전달
+    }
+}
+
+//------------------------------------------------------------------
+bool StockService::isConnected() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
     StockServiceHelper stockServiceHelper;
 
-    HWND hWnd = FindWindow(0, L"STOCK-EXECUTOR");
+    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
 
-    SendMessage(hWnd, WM_COMMAND, 1001, 0);
+    SendMessage(hWnd, WM_COMMAND, IDC_BTN_ISCONNECTED, 0);
 
     stockServiceHelper.messageLoop();
 
-    return stockServiceHelper.getData();
-    //if (isConnected()) {
-        //wmcaIntf.Disconnect();
-    //}
+    std::wstring data = stockServiceHelper.getData();
+
+    web::json::value resJson = web::json::value::parse(data);
+    return resJson.at(L"data").at(L"status").as_bool();
 }
 
-bool StockService::isConnected() {
-    //return wmcaIntf.IsConnected();
-    return false;
+//------------------------------------------------------------------
+/**
+ * RequestJson Format:
+ * {
+ *      "code" : "000000"
+ * }
+ */
+std::wstring StockService::getCurrentPriceOfItem(std::wstring& code) {
+    if (isConnected()) {
+        std::lock_guard<std::mutex> lock_guard(stockMutex);
+        StockServiceHelper stockServiceHelper;
+
+        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+
+        std::wstring jsonString = L"{ \"code\": \"" + code + L"\"}";
+
+        COPYDATASTRUCT cds;
+        cds.dwData = WM_STOCK_EXECUTOR_SETSTRINGVARIABLE;
+        cds.cbData = jsonString.size() * sizeof(wchar_t);
+        cds.lpData = (PVOID)jsonString.c_str();
+
+        SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
+        SendMessage(hWnd, WM_COMMAND, IDC_BTN_INQUIRECURRENTPRICE, 0);
+
+        stockServiceHelper.messageLoop();
+
+        return stockServiceHelper.getData();
+    }
+    else {
+        // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
+    }
 }
 
+//------------------------------------------------------------------
 void StockService::getBalance() {
 
 }
 
+//------------------------------------------------------------------
 std::wstring StockService::getTest() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
     /*
@@ -81,7 +127,7 @@ std::wstring StockService::getTest() {
     wmcaIntfHelper.registerWndClass(WmcaIntfMsgProc::sampleWndProc);
     wmcaIntfHelper.initInstance();
 
-    HWND hWnd = FindWindow(0, L"OpenAPI_Test");
+    HWND hWnd = FindWindowW(0, L"OpenAPI_Test");
     SendMessage(hWnd, WM_COMMAND, 1003, 0);
 
     wmcaIntfHelper.messageLoop();

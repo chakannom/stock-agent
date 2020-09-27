@@ -183,6 +183,9 @@
     <ClCompile Include="src\stock\stock_service_helper.cpp">
       <Filter>소스 파일\stock</Filter>
     </ClCompile>
+    <ClCompile Include="src\stock\stock_executor_process.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\util\runtime_util.hpp">
@@ -285,6 +288,9 @@
       <Filter>헤더 파일\core\util</Filter>
     </ClInclude>
     <ClInclude Include="src\stock\stock_service_helper.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_executor_process.hpp">
       <Filter>헤더 파일\stock</Filter>
     </ClInclude>
   </ItemGroup>
