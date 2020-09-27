@@ -16,7 +16,10 @@ public:
     bool isConnected();
     std::wstring getCurrentPriceOfItem(std::wstring& code);
     void getBalance(); // 잔고조회
+private:
+    web::json::value getResponseJson(const wchar_t* pRequestMessage, DWORD btnId);
 
+public:
     std::wstring getTest();
 };
 

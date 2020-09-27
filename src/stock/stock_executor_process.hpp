@@ -4,15 +4,15 @@
 class StockExecutorProcess
 {
 private:
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
 public:
-	StockExecutorProcess();
-	~StockExecutorProcess();
+    StockExecutorProcess();
+    ~StockExecutorProcess();
 private:
-	void start();
-	void stop();
-	bool running();
-	void kill();
+    void start();
+    void stop();
+    bool running();
+    void kill();
 };
 

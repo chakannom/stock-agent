@@ -28,11 +28,9 @@
 
 #include <string>
 #include <core/header/header.hpp>
-#include <core/util/string_util.hpp>
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
-using namespace cks;
 
 namespace cfx {
    
@@ -53,7 +51,8 @@ namespace cfx {
          return hostIP(AF_INET6);
       }
       static std::wstring hostName() {
-         return StringUtil::toWString(ip::host_name());
+         std::string hostName = ip::host_name();
+         return std::wstring(hostName.cbegin(), hostName.cend());
       }
    };
       

@@ -20,23 +20,11 @@
 std::wstring StockService::connect(const web::json::value& reqJson) {
     if (!isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
-        StockServiceHelper stockServiceHelper;
+        std::wstring requestMessage = reqJson.serialize();
 
-        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_CONNECT);
 
-        std::wstring jsonString = reqJson.serialize();
-
-        COPYDATASTRUCT cds;
-        cds.dwData = WM_STOCK_EXECUTOR_SETSTRINGVARIABLE;
-        cds.cbData = jsonString.size() * sizeof(wchar_t);
-        cds.lpData = (PVOID)jsonString.c_str();
-
-        SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
-        SendMessage(hWnd, WM_COMMAND, IDC_BTN_CONNECT, 0);
-
-        stockServiceHelper.messageLoop();
-
-        return stockServiceHelper.getData();
+        return resJson.serialize();
     }
     else {
         // 연결 중 호출한 경우 같은 데이터 전달
@@ -47,15 +35,10 @@ std::wstring StockService::connect(const web::json::value& reqJson) {
 std::wstring StockService::disconnect() {
     if (isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
-        StockServiceHelper stockServiceHelper;
 
-        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+        web::json::value resJson = getResponseJson(nullptr, IDC_BTN_DISCONNECT);
 
-        SendMessage(hWnd, WM_COMMAND, IDC_BTN_DISCONNECT, 0);
-
-        stockServiceHelper.messageLoop();
-
-        return stockServiceHelper.getData();
+        return resJson.serialize();
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결 해제된 상태임을 알려주는 데이터 전달
@@ -65,17 +48,9 @@ std::wstring StockService::disconnect() {
 //------------------------------------------------------------------
 bool StockService::isConnected() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
-    StockServiceHelper stockServiceHelper;
 
-    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+    web::json::value resJson = getResponseJson(nullptr, IDC_BTN_ISCONNECTED);
 
-    SendMessage(hWnd, WM_COMMAND, IDC_BTN_ISCONNECTED, 0);
-
-    stockServiceHelper.messageLoop();
-
-    std::wstring data = stockServiceHelper.getData();
-
-    web::json::value resJson = web::json::value::parse(data);
     return resJson.at(L"data").at(L"status").as_bool();
 }
 
@@ -89,23 +64,11 @@ bool StockService::isConnected() {
 std::wstring StockService::getCurrentPriceOfItem(std::wstring& code) {
     if (isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
-        StockServiceHelper stockServiceHelper;
+        std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
 
-        HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
 
-        std::wstring jsonString = L"{ \"code\": \"" + code + L"\"}";
-
-        COPYDATASTRUCT cds;
-        cds.dwData = WM_STOCK_EXECUTOR_SETSTRINGVARIABLE;
-        cds.cbData = jsonString.size() * sizeof(wchar_t);
-        cds.lpData = (PVOID)jsonString.c_str();
-
-        SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
-        SendMessage(hWnd, WM_COMMAND, IDC_BTN_INQUIRECURRENTPRICE, 0);
-
-        stockServiceHelper.messageLoop();
-
-        return stockServiceHelper.getData();
+        return resJson.serialize();
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
@@ -117,24 +80,35 @@ void StockService::getBalance() {
 
 }
 
+web::json::value StockService::getResponseJson(const wchar_t* pRequestMessage, DWORD btnId) {
+    StockServiceHelper stockServiceHelper;
+
+    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+
+    if (pRequestMessage != nullptr && wcslen(pRequestMessage) > 0) {
+        COPYDATASTRUCT cds;
+        cds.dwData = WM_STOCK_EXECUTOR_SETSTRINGVARIABLE;
+        cds.cbData = wcslen(pRequestMessage) * sizeof(wchar_t);
+        cds.lpData = (PVOID)pRequestMessage;
+
+        SendMessage(hWnd, WM_COPYDATA, 0, (LPARAM)&cds);
+    }
+
+    SendMessage(hWnd, WM_COMMAND, btnId, 0);
+
+    stockServiceHelper.messageLoop();
+
+    std::wstring data = stockServiceHelper.getData();
+    // LOG.DEBUG(data) 넣기..
+    return web::json::value::parse(data);
+}
+
 //------------------------------------------------------------------
 std::wstring StockService::getTest() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
-    /*
-    WmcaIntfMsgProc::sampleData.clear();
+    //std::wstring code = L"한국";
+    //std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
 
-    WmcaIntfHelper wmcaIntfHelper(L"GetTest", L"GetTest");
-    wmcaIntfHelper.registerWndClass(WmcaIntfMsgProc::sampleWndProc);
-    wmcaIntfHelper.initInstance();
-
-    HWND hWnd = FindWindowW(0, L"OpenAPI_Test");
-    SendMessage(hWnd, WM_COMMAND, 1003, 0);
-
-    wmcaIntfHelper.messageLoop();
-
-    std::wstring str(WmcaIntfMsgProc::sampleData);
-    WmcaIntfMsgProc::sampleData.clear();
-    return str;
-    */
+    //web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_ISCONNECTED);
     return std::wstring(L"getTest");
 }
