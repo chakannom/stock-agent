@@ -40,6 +40,7 @@
     <ClCompile Include="src\initializer.cpp" />
     <ClCompile Include="src\sample\user_service.cpp" />
     <ClCompile Include="src\stock\stock_executor_process.cpp" />
+    <ClCompile Include="src\stock\stock_repository.cpp" />
     <ClCompile Include="src\stock\stock_rest_controller.cpp" />
     <ClCompile Include="src\stock\stock_service.cpp" />
     <ClCompile Include="src\stock\stock_service_helper.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="src\initializer.hpp" />
     <ClInclude Include="src\sample\user_service.hpp" />
     <ClInclude Include="src\stock\stock_executor_process.hpp" />
+    <ClInclude Include="src\stock\stock_repository.hpp" />
     <ClInclude Include="src\stock\stock_rest_controller.hpp" />
     <ClInclude Include="src\stock\stock_service.hpp" />
     <ClInclude Include="src\stock\stock_service_helper.hpp" />

@@ -17,3 +17,7 @@ LOG4CXX_ERROR(log, "error output...");
 LOG4CXX_WARN(log, "warn output...");
 LOG4CXX_INFO(log, "info output...");
 LOG4CXX_DEBUG(log, "debug output...");
+
+## how to get listed items in Korea
+- http://kind.krx.co.kr/corpgeneral/corpList.do?method=download
+- https://woosa7.github.io/krx_stock_master/

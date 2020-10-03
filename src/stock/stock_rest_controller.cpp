@@ -25,10 +25,15 @@ void StockRestController::handleGet(http_request request) {
             response[L"status"] = json::value::boolean(stockService.isConnected());
             request.reply(status_codes::OK, response);
         }
+        else if (std::regex_match(path, matches, std::wregex(L"/current/items"))) {
+            auto response = json::value::object();
+            response[L"items"] = json::value::string(stockService.getCurrentPriceOfItems());
+            request.reply(status_codes::OK, response);
+        }
         else if (std::regex_match(path, matches, std::wregex(L"/current/items/(\\d{6})"))) {
             std::wstring code = matches[1];
             auto response = json::value::object();
-            response[L"query"] = json::value::string(stockService.getCurrentPriceOfItem(code));
+            response[L"item"] = json::value::string(stockService.getCurrentPriceOfItem(code));
             request.reply(status_codes::OK, response);
         }
         else if (std::regex_match(path, matches, std::wregex(L"/test"))) {

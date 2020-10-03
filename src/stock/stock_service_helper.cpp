@@ -1,5 +1,5 @@
 #pragma comment(lib, "user32.lib")
-#define UNICODE
+#define _UNICODE
 #include <iostream>
 #include <string>
 #define WIN32_LEAN_AND_MEAN // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
@@ -29,8 +29,12 @@ BOOL StockServiceHelper::OnCopyData(COPYDATASTRUCT* pCopyDataStruct) {
     switch (pCopyDataStruct->dwData)
     {
     case WM_STOCK_AGENT_SETSTRINGVARIABLE:
-        data = (LPCTSTR)pCopyDataStruct->lpData;
+    {
+        LPCWSTR lpData = (LPCWSTR)pCopyDataStruct->lpData;
+        int length = pCopyDataStruct->cbData / sizeof(wchar_t);
+        data = std::wstring(lpData, length);
         break;
+    }
     default:
         break;
     }
