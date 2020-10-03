@@ -19,28 +19,31 @@ StockService::StockService() {
  *      "certPw" : "certificate password"
  * }
  */
-std::wstring StockService::connect(const web::json::value& reqJson) {
+web::json::value StockService::connect(const web::json::value& reqJson) {
     if (!isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
         std::wstring requestMessage = reqJson.serialize();
 
         web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_CONNECT);
+        if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
+            // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
+        }
 
-        return resJson.serialize();
+        return resJson.at(L"data");
     }
     else {
-        // 연결 중 호출한 경우 같은 데이터 전달
+        // 연결 중 상태임을 알려주는 데이터 전달
     }
 }
 
 //------------------------------------------------------------------
-std::wstring StockService::disconnect() {
+bool StockService::disconnect() {
     if (isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
 
         web::json::value resJson = getResponseJson(nullptr, IDC_BTN_DISCONNECT);
 
-        return resJson.serialize();
+        return true;
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결 해제된 상태임을 알려주는 데이터 전달
@@ -57,26 +60,27 @@ bool StockService::isConnected() {
 }
 
 //------------------------------------------------------------------
-std::wstring StockService::getCurrentPriceOfItems() {
+web::json::value StockService::getCurrentPriceOfItems() {
     if (isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
+        web::json::value items = web::json::value::array();
+        int i = 0;
 
-        clock_t startedMilliseconds = clock();
-
-        web::json::value resJson = web::json::value::array();
         std::vector<std::wstring> codes = stockRepository.getCodesFromListedItem();
-        for (int i = 0; i < codes.size(); i++) {
-            std::wstring requestMessage = L"{ \"code\": \"" + codes[i] + L"\"}";
+        for (std::wstring code : codes) {
+            std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
             // 가져온 데이터로 조건 검색 추가할 것
             // 검색에 맞는 것만 resJson에 넣음
-            resJson[i] = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
+            web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
+            if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
+                // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
+            }
+            if (resJson.has_field(L"data")) {
+                items[i++] = resJson.at(L"data");
+            }
         }
 
-        clock_t endedMilliseconds = clock();
-        long durationMilliseconds = endedMilliseconds - startedMilliseconds;
-        std::wcout << durationMilliseconds << std::endl;
-
-        return resJson.serialize();
+        return items;
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
@@ -90,14 +94,21 @@ std::wstring StockService::getCurrentPriceOfItems() {
  *      "code" : "000000"
  * }
  */
-std::wstring StockService::getCurrentPriceOfItem(std::wstring& code) {
+web::json::value StockService::getCurrentPriceOfItem(std::wstring& code) {
     if (isConnected()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
+        web::json::value item = web::json::value::object();
+
         std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
-
         web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
+        if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
+            // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
+        }
+        if (resJson.has_field(L"data")) {
+            item = resJson.at(L"data");
+        }
 
-        return resJson.serialize();
+        return item;
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달

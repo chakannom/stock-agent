@@ -13,11 +13,11 @@ private:
 public:
     StockService();
     ~StockService() = default;
-    std::wstring connect(const web::json::value& reqJson);
-    std::wstring disconnect();
+    web::json::value connect(const web::json::value& reqJson);
+    bool disconnect();
     bool isConnected();
-    std::wstring getCurrentPriceOfItems();
-    std::wstring getCurrentPriceOfItem(std::wstring& code);
+    web::json::value getCurrentPriceOfItems();
+    web::json::value getCurrentPriceOfItem(std::wstring& code);
     void getBalance(); // 잔고조회
 private:
     web::json::value getResponseJson(const wchar_t* pRequestMessage, DWORD btnId);

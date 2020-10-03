@@ -21,24 +21,21 @@ void StockRestController::handleGet(http_request request) {
         auto path = requestPath(request);
         std::wsmatch matches;
         if (std::regex_match(path, matches, std::wregex(L"/connect/status"))) {
-            auto response = json::value::object();
-            response[L"status"] = json::value::boolean(stockService.isConnected());
+            auto response = web::json::value::boolean(stockService.isConnected());
             request.reply(status_codes::OK, response);
         }
         else if (std::regex_match(path, matches, std::wregex(L"/current/items"))) {
-            auto response = json::value::object();
-            response[L"items"] = json::value::string(stockService.getCurrentPriceOfItems());
+            auto response = stockService.getCurrentPriceOfItems();
             request.reply(status_codes::OK, response);
         }
         else if (std::regex_match(path, matches, std::wregex(L"/current/items/(\\d{6})"))) {
             std::wstring code = matches[1];
-            auto response = json::value::object();
-            response[L"item"] = json::value::string(stockService.getCurrentPriceOfItem(code));
+            auto response = stockService.getCurrentPriceOfItem(code);
             request.reply(status_codes::OK, response);
         }
         else if (std::regex_match(path, matches, std::wregex(L"/test"))) {
-            auto response = json::value::object();
-            response[L"query"] = json::value::string(stockService.getTest());
+            auto response = web::json::value::object();
+            response[L"query"] = web::json::value::string(stockService.getTest());
             request.reply(status_codes::OK, response);
         }
     }
@@ -65,13 +62,11 @@ void StockRestController::handlePost(http_request request) {;
         auto path = requestPath(request);
         std::wsmatch matches;
         if (std::regex_match(path, matches, std::wregex(L"/connect"))) {
-            auto response = json::value::object();
-            response[L"connect"] = json::value::string(stockService.connect(request.extract_json().get()));
+            auto response = stockService.connect(request.extract_json().get());
             request.reply(status_codes::OK, response);
         }
         else if (std::regex_match(path, matches, std::wregex(L"/disconnect"))) {
-            auto response = json::value::object();
-            response[L"disconnect"] = json::value::string(stockService.disconnect());
+            auto response = web::json::value::boolean(stockService.disconnect());
             request.reply(status_codes::OK, response);
         }
     }
