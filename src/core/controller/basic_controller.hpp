@@ -44,7 +44,7 @@ namespace cfx {
         BasicController() {};
         ~BasicController() {};
 
-        void setEndpoint(const std::wstring & value);
+        void setEndpoint(const std::wstring& value);
         utility::string_t endpoint() const;
         pplx::task<void> accept();
         pplx::task<void> shutdown();
@@ -53,7 +53,9 @@ namespace cfx {
             /* had to be implemented by the child class */ 
         }
 
-        utility::string_t requestPath(const http_request & request);
-        std::vector<utility::string_t> splittedRequestPath(const http_request & request);
+        utility::string_t requestPath(const http_request& request);
+        std::vector<utility::string_t> splittedRequestPath(const http_request& request);
+        utility::string_t requestQuery(const http_request& request);
+        std::map<utility::string_t, utility::string_t> splittedRequestQuery(const http_request& request);
     };
 }

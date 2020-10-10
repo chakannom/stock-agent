@@ -11,8 +11,8 @@ StockExecutorProcess::~StockExecutorProcess() {
 void StockExecutorProcess::start() {
     if (running()) kill();
 
-    LPWSTR applicationName = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor.exe";
-    LPWSTR commandLine = (LPWSTR)L"stock-executor.exe --execute uuid";
+    LPWSTR applicationName = (LPWSTR)L"C:\\Users\\chakannom\\Development\\workspace\\visualstudio\\stock\\executor\\stock-executor-for-ebest.exe";
+    LPWSTR commandLine = (LPWSTR)L"stock-executor-for-ebest.exe --execute uuid";
     si.cb = sizeof(si);
     CreateProcess(applicationName, commandLine, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
 }
@@ -25,7 +25,7 @@ void StockExecutorProcess::stop() {
 }
 
 bool StockExecutorProcess::running() {
-    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR-FOR-EBEST");
     if (hWnd == NULL) {
         return false;
     }
@@ -33,7 +33,7 @@ bool StockExecutorProcess::running() {
 }
 
 void StockExecutorProcess::kill() {
-    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR-FOR-EBEST");
     if (!hWnd) return;
     DWORD processId;
     GetWindowThreadProcessId(hWnd, &processId);

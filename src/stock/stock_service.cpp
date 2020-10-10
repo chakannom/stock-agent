@@ -1,5 +1,6 @@
 #define _UNICODE
 #include <string>
+#include <map>
 #define WIN32_LEAN_AND_MEAN // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 #include <windows.h>
 #include "stock_service.hpp"
@@ -7,6 +8,7 @@
 #include <stock/stock_service_helper.hpp>
 
 StockService::StockService() {
+    stockGubun = { {L"ALL", L"0"}, {L"KOSPI", L"1"}, {L"KOSDAQ", L"2"} };
     delayMilliseconds = stockRepository.getDelayMillisecondsFromConfig();
 }
 
@@ -17,14 +19,15 @@ StockService::StockService() {
  *      "id" : "username",
  *      "pw" : "password",
  *      "certPw" : "certificate password"
+ *      "serverType" : "server type"        ## HTS | DEMO
  * }
  */
-web::json::value StockService::connect(const web::json::value& reqJson) {
-    if (!isConnected()) {
+web::json::value StockService::login(const web::json::value& reqJson) {
+    if (!isLogin()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
         std::wstring requestMessage = reqJson.serialize();
 
-        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_CONNECT);
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_LOGIN);
         if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
             // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
         }
@@ -32,16 +35,16 @@ web::json::value StockService::connect(const web::json::value& reqJson) {
         return resJson.at(L"data");
     }
     else {
-        // 연결 중 상태임을 알려주는 데이터 전달
+        // 로그인 중 상태임을 알려주는 데이터 전달
     }
 }
 
 //------------------------------------------------------------------
-bool StockService::disconnect() {
-    if (isConnected()) {
+bool StockService::logout() {
+    if (isLogin()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
 
-        web::json::value resJson = getResponseJson(nullptr, IDC_BTN_DISCONNECT);
+        web::json::value resJson = getResponseJson(nullptr, IDC_BTN_LOGOUT);
 
         return true;
     }
@@ -51,36 +54,29 @@ bool StockService::disconnect() {
 }
 
 //------------------------------------------------------------------
-bool StockService::isConnected() {
+bool StockService::isLogin() {
     std::lock_guard<std::mutex> lock_guard(stockMutex);
 
-    web::json::value resJson = getResponseJson(nullptr, IDC_BTN_ISCONNECTED);
+    web::json::value resJson = getResponseJson(nullptr, IDC_BTN_ISLOGIN);
 
     return resJson.at(L"data").at(L"status").as_bool();
 }
 
 //------------------------------------------------------------------
-web::json::value StockService::getCurrentPriceOfItems() {
-    if (isConnected()) {
+/**
+ * "gubun"=  "ALL" | "KOSPI" | "KOSDAQ"
+ */
+web::json::value StockService::getStocksByGubun(const std::wstring& gubun) {
+    if (isLogin()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
-        web::json::value items = web::json::value::array();
-        int i = 0;
 
-        std::vector<std::wstring> codes = stockRepository.getCodesFromListedItem();
-        for (std::wstring code : codes) {
-            std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
-            // 가져온 데이터로 조건 검색 추가할 것
-            // 검색에 맞는 것만 resJson에 넣음
-            web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
-            if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
-                // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
-            }
-            if (resJson.has_field(L"data")) {
-                items[i++] = resJson.at(L"data");
-            }
+        std::wstring requestMessage = L"{ \"gubun\": \"" + stockGubun.at(gubun) + L"\"}";
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_STOCKSBYGUBUN);
+        if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
+            // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
         }
 
-        return items;
+        return resJson.at(L"data");
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
@@ -89,31 +85,47 @@ web::json::value StockService::getCurrentPriceOfItems() {
 
 //------------------------------------------------------------------
 /**
- * RequestJson Format:
- * {
- *      "code" : "000000"
- * }
+ * "code" : "000000"
  */
-web::json::value StockService::getCurrentPriceOfItem(std::wstring& code) {
-    if (isConnected()) {
+web::json::value StockService::getStockCurrentAskingPrice(const std::wstring& code) {
+    if (isLogin()) {
         std::lock_guard<std::mutex> lock_guard(stockMutex);
-        web::json::value item = web::json::value::object();
 
         std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
-        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_INQUIRECURRENTPRICE);
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_STOCKCURRENTASKINGPRICE);
         if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
             // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
         }
-        if (resJson.has_field(L"data")) {
-            item = resJson.at(L"data");
-        }
 
-        return item;
+        return resJson.at(L"data");
     }
     else {
         // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
     }
 }
+
+//------------------------------------------------------------------
+/**
+ * "code" : "000000"
+ */
+web::json::value StockService::getStockCurrentMarketPrice(const std::wstring& code) {
+    if (isLogin()) {
+        std::lock_guard<std::mutex> lock_guard(stockMutex);
+
+        std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
+        web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_STOCKCURRENTMARKETPRICE);
+        if (!resJson.at(L"code").as_string()._Equal(L"00000")) {
+            // resJson.at(L"message").as_string(); 과 함께 에러 발생 처리
+        }
+
+        return resJson.at(L"data");
+    }
+    else {
+        // 연결 중이 아닌데 호출한 경우 연결이 필요하다는 데이터 전달
+    }
+}
+
+
 
 //------------------------------------------------------------------
 void StockService::getBalance() {
@@ -126,7 +138,7 @@ web::json::value StockService::getResponseJson(const wchar_t* pRequestMessage, D
 
     StockServiceHelper stockServiceHelper;
 
-    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR");
+    HWND hWnd = FindWindowW(0, L"STOCK-EXECUTOR-FOR-EBEST");
 
     if (pRequestMessage != nullptr && wcslen(pRequestMessage) > 0) {
         COPYDATASTRUCT cds;
@@ -160,7 +172,7 @@ std::wstring StockService::getTest() {
     //std::wstring code = L"한국";
     //std::wstring requestMessage = L"{ \"code\": \"" + code + L"\"}";
 
-    //web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_ISCONNECTED);
+    //web::json::value resJson = getResponseJson(requestMessage.c_str(), IDC_BTN_ISLOGIN);
 
     web::json::value resJson = web::json::value::array();
     /*

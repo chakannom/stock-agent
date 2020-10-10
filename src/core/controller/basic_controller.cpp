@@ -28,7 +28,7 @@
 #include "basic_controller.hpp"
 
 namespace cfx {
-    void BasicController::setEndpoint(const std::wstring & value) {
+    void BasicController::setEndpoint(const std::wstring& value) {
         uri endpointURI(value);
         uri_builder endpointBuilder;
 
@@ -61,12 +61,21 @@ namespace cfx {
         return _listener.close();
     }
 
-    utility::string_t BasicController::requestPath(const http_request & request) {
+    utility::string_t BasicController::requestPath(const http_request& request) {
         return uri::decode(request.relative_uri().path());   
     }
 
-    std::vector<utility::string_t> BasicController::splittedRequestPath(const http_request & request) {
+    std::vector<utility::string_t> BasicController::splittedRequestPath(const http_request& request) {
         auto relativePath = requestPath(request);
         return uri::split_path(relativePath);
+    }
+
+    utility::string_t BasicController::requestQuery(const http_request& request) {
+        return request.relative_uri().query();
+    }
+
+    std::map<utility::string_t, utility::string_t> BasicController::splittedRequestQuery(const http_request& request) {
+        auto relativeQuery = requestQuery(request);
+        return uri::split_query(relativeQuery);
     }
 }
