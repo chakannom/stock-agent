@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\core">
+      <UniqueIdentifier>{6eb991f1-9fb3-4aa6-b3b2-f1afaac1e4e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\agent">
+      <UniqueIdentifier>{fcb4c0a3-5864-47f7-86c3-bb0f9a0818eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\agent\config">
+      <UniqueIdentifier>{ccb58ce9-a9ec-46ae-80c9-6ddc0a5777f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config">
+      <UniqueIdentifier>{ffa9dd1e-527a-4f0c-b344-fce30ea689c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\controller">
+      <UniqueIdentifier>{d1931a4e-4e55-46e6-821a-62f6b4c80105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\header">
+      <UniqueIdentifier>{70918de9-7410-467b-b07f-f2c495748f81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\util">
+      <UniqueIdentifier>{93cd8ef5-8253-4ca2-b153-f3bec1596883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\interrupt">
+      <UniqueIdentifier>{b4bdd415-85ed-4a8c-84d8-02f4cf0b68f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty">
+      <UniqueIdentifier>{1ef75e33-0f1f-4d04-a777-ada5c17f5d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cppdb">
+      <UniqueIdentifier>{c21f9ea4-dd7c-4a81-8b95-632102266bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cppdb\drivers">
+      <UniqueIdentifier>{a83e67ea-a814-4c41-b11f-b3988ac2d12d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\agent">
+      <UniqueIdentifier>{fa64da75-cced-4982-9595-b13f8c961a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core">
+      <UniqueIdentifier>{3555169c-104c-4f33-a629-7ebe01ddf2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\agent\config">
+      <UniqueIdentifier>{12c590b1-8b14-44ad-9d03-939004cf5407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config">
+      <UniqueIdentifier>{28116183-9223-44fe-b8e5-bf4c8b668a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\controller">
+      <UniqueIdentifier>{36ba55b5-6391-4d2d-8791-09f13534bc31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\header">
+      <UniqueIdentifier>{13c8fc60-986b-424c-ba20-2ad5eac0d6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\util">
+      <UniqueIdentifier>{585ab83b-2335-4da6-8d87-0397d608de6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\interrupt">
+      <UniqueIdentifier>{27612ccc-190d-476e-842b-f6a7bc710a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty">
+      <UniqueIdentifier>{4609e706-261f-4969-bb7d-d8c04ab557ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty\cppdb">
+      <UniqueIdentifier>{8581ea55-944c-4163-8a7b-b2e51596956c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\logger">
+      <UniqueIdentifier>{7024d62f-4c2a-4031-95ce-59c889546ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\version">
+      <UniqueIdentifier>{e9e32c58-c4e0-444d-9e0b-ad908612cf6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\version">
+      <UniqueIdentifier>{03aff1b1-e3be-487c-b2b1-d79877fc5e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\stock">
+      <UniqueIdentifier>{7822e4b0-31ad-4848-a31a-08fcf5ae2908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\stock">
+      <UniqueIdentifier>{a3a020cd-d1c7-4ef2-b2ee-393b473c0897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\sample">
+      <UniqueIdentifier>{7c50bc7c-4aa7-4ab0-a729-5dcf5531c589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\sample">
+      <UniqueIdentifier>{abc7cd11-e81f-482f-a11b-4066406db7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty\cpprest">
+      <UniqueIdentifier>{52be1b0a-5f33-4aea-867f-7c01a3e54cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cpprest">
+      <UniqueIdentifier>{4380768f-8049-49ee-ac1a-3281f1d05e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\core\config\thirdparty\cpprest\details">
+      <UniqueIdentifier>{f28a86d2-25b2-449c-a079-146e6a9b5d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\core\config\thirdparty\cpprest\details">
+      <UniqueIdentifier>{9d3a2602-d1c2-48c4-bcc9-63f825dd3b4a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\agent\config\database_configuration.cpp">
+      <Filter>소스 파일\agent\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\atomic_counter.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\backend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\conn_manager.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\driver_manager.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\frontend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\mutex.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\pool.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\shared_object.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\utils.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\mysql_backend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb\drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\odbc_backend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb\drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\postgres_backend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb\drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\sqlite3_backend.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cppdb\drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\controller\basic_controller.cpp">
+      <Filter>소스 파일\core\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\util\network_util.cpp">
+      <Filter>소스 파일\core\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\initializer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\version\version_rest_controller.cpp">
+      <Filter>소스 파일\version</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_rest_controller.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sample\user_service.cpp">
+      <Filter>소스 파일\sample</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_service.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp">
+      <Filter>소스 파일\core\config\thirdparty\cpprest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_service_helper.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_executor_process.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stock\stock_repository.cpp">
+      <Filter>소스 파일\stock</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\util\runtime_util.hpp">
+      <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\util\response_util.hpp">
+      <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\util\network_util.hpp">
+      <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\header\header.hpp">
+      <Filter>헤더 파일\core\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\controller\basic_controller.hpp">
+      <Filter>헤더 파일\core\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\controller\controller.hpp">
+      <Filter>헤더 파일\core\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\interrupt\interrupt_handler.hpp">
+      <Filter>헤더 파일\core\config\interrupt</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\atomic_counter.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\backend.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\conn_manager.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\connection_specific.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\defs.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\driver_manager.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\errors.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\frontend.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\mutex.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\numeric_util.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\pool.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\ref_ptr.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\shared_object.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cppdb\utils.hpp">
+      <Filter>헤더 파일\core\config\thirdparty\cppdb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\logger\logger_handler.hpp">
+      <Filter>헤더 파일\core\config\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\version\version_rest_controller.hpp">
+      <Filter>헤더 파일\version</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_rest_controller.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sample\user_service.hpp">
+      <Filter>헤더 파일\sample</Filter>
+    </ClInclude>
+    <ClInclude Include="src\initializer.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_service.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\pragma_warnings.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\logging_utils.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\private_access.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\system_error.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest\details</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\config\thirdparty\cpprest\uri_schemes.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\util\string_util.hpp">
+      <Filter>헤더 파일\core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_service_helper.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_executor_process.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stock\stock_repository.hpp">
+      <Filter>헤더 파일\stock</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+    <None Include="log4cxx.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\core\config\thirdparty\cpprest\ws_listener.h">
+      <Filter>헤더 파일\core\config\thirdparty\cpprest</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

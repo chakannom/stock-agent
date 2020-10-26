@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\agent\config\database_configuration.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\atomic_counter.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\backend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\conn_manager.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\mysql_backend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\odbc_backend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\postgres_backend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\drivers\sqlite3_backend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\driver_manager.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\frontend.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\mutex.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\pool.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\shared_object.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cppdb\utils.cpp" />
+    <ClCompile Include="src\core\config\thirdparty\cpprest\ws_listener_impl.cpp" />
+    <ClCompile Include="src\core\controller\basic_controller.cpp" />
+    <ClCompile Include="src\core\util\network_util.cpp" />
+    <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\initializer.cpp" />
+    <ClCompile Include="src\sample\user_service.cpp" />
+    <ClCompile Include="src\stock\stock_executor_process.cpp" />
+    <ClCompile Include="src\stock\stock_repository.cpp" />
+    <ClCompile Include="src\stock\stock_rest_controller.cpp" />
+    <ClCompile Include="src\stock\stock_service.cpp" />
+    <ClCompile Include="src\stock\stock_service_helper.cpp" />
+    <ClCompile Include="src\version\version_rest_controller.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\config\interrupt\interrupt_handler.hpp" />
+    <ClInclude Include="src\core\config\logger\logger_handler.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\atomic_counter.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\backend.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\connection_specific.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\conn_manager.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\defs.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\driver_manager.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\errors.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\frontend.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\mutex.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\numeric_util.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\pool.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\ref_ptr.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\shared_object.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cppdb\utils.hpp" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\pragma_warnings.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\private_access.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\details\system_error.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\logging_utils.h" />
+    <ClInclude Include="src\core\config\thirdparty\cpprest\uri_schemes.h" />
+    <ClInclude Include="src\core\controller\basic_controller.hpp" />
+    <ClInclude Include="src\core\controller\controller.hpp" />
+    <ClInclude Include="src\core\header\header.hpp" />
+    <ClInclude Include="src\core\util\network_util.hpp" />
+    <ClInclude Include="src\core\util\response_util.hpp" />
+    <ClInclude Include="src\core\util\runtime_util.hpp" />
+    <ClInclude Include="src\core\util\string_util.hpp" />
+    <ClInclude Include="src\initializer.hpp" />
+    <ClInclude Include="src\sample\user_service.hpp" />
+    <ClInclude Include="src\stock\stock_executor_process.hpp" />
+    <ClInclude Include="src\stock\stock_repository.hpp" />
+    <ClInclude Include="src\stock\stock_rest_controller.hpp" />
+    <ClInclude Include="src\stock\stock_service.hpp" />
+    <ClInclude Include="src\stock\stock_service_helper.hpp" />
+    <ClInclude Include="src\version\version_rest_controller.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
+    <None Include="log4cxx.conf" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\core\config\thirdparty\cpprest\ws_listener.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d8023add-db39-439e-bd46-57e41ef46710}</ProjectGuid>
+    <RootNamespace>stockagent</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(VcpkgRoot)\installed\x86-windows\include;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(VcpkgRoot)\installed\x86-windows\lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(VcpkgRoot)\installed\x64-windows\include;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitFramePointers>false</OmitFramePointers>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(VcpkgRoot)\installed\x64-windows\lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
